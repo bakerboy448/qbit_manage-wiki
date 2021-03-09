@@ -11,6 +11,8 @@ When you open it up you'll see a bunch of packages that you can install. <br> We
 
 * `python3`
 
+* `python-setuptools`
+
 To get this running in unRAID go ahead and download the repo to your computer. 
 
 Then take all the data from the zip file and place it somewhere on your server.
@@ -78,6 +80,8 @@ tags:
   landof.tv: BroadcasTheNet
   passthepopcorn: PassThePopcorn
   stackoverflow: IPTorrents
+  empirehost: IPTorrents
+  routing.bgp: IPTorrents
   morethantv: MoreThanTV
   myanonamouse: MyAnonaMouse
   opsfet: Orpheus
