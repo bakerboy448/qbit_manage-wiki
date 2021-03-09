@@ -107,15 +107,18 @@ python3.9 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -
 ```
 if you want to change the arguments such as the `-ms` a full list of arguments can be seen below
 ```
+A mix of scripts combined for managing qBittorrent.
+
 optional arguments:
   -h, --help            show this help message and exit
   -c CONFIG, --config-file CONFIG
                         This is used if you want to use a different name for your config.yml. Example: tv.yml
   -l LOGFILE, --log-file LOGFILE
                         This is used if you want to use a different name for your log file. Example: tv.log
-  -m, --manage          Use this if you would like to update your tags AND categories AND remove unregistered
-                        torrents.
-  -s, --cross-seed      Use this after running cross-seed script to add your torrents into qBittorrent
+  -m, --manage          Use this if you would like to update your tags, categories, remove unregistered torrents,
+                        AND recheck/resume paused torrents.
+  -s, --cross-seed      Use this after running cross-seed script to add torrents from the cross-seed output folder
+                        to qBittorrent
   -re, --recheck        Recheck paused torrents sorted by lowest size. Resume if Completed.
   -g, --cat-update      Use this if you would like to update your categories.
   -t, --tag-update      Use this if you would like to update your tags.
