@@ -136,4 +136,5 @@ optional arguments:
   Once you've got the config file set up you should be all set. 
   Don't forget to set a cron schedule mines <br>`*/30 * * * *` <-- Runs every 30 min
   
- 
+**Final note:**<br>
+If you're wanting to do a test run please use the `--dry-run` argument anywhere w/in the call to test how things will look. Please do this before running a full run.
