@@ -110,28 +110,7 @@ However, at the core you'll want
 python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -l /<path to where you want log file>/activity.log
 ```
 if you want to change the arguments such as the `-ms` a full list of arguments can be seen below
-```
-A mix of scripts combined for managing qBittorrent.
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -c CONFIG, --config-file CONFIG
-                        This is used if you want to use a different name for your config.yml. Example: tv.yml
-  -l LOGFILE, --log-file LOGFILE
-                        This is used if you want to use a different name for your log file. Example: tv.log
-  -m, --manage          Use this if you would like to update your tags, categories, remove unregistered torrents,
-                        AND recheck/resume paused torrents.
-  -s, --cross-seed      Use this after running cross-seed script to add torrents from the cross-seed output folder
-                        to qBittorrent
-  -re, --recheck        Recheck paused torrents sorted by lowest size. Resume if Completed.
-  -g, --cat-update      Use this if you would like to update your categories.
-  -t, --tag-update      Use this if you would like to update your tags.
-  -r, --rem-unregistered
-                        Use this if you would like to remove unregistered torrents.
-  --dry-run             If you would like to see what is gonna happen but not actually delete or tag/categorize
-                        anything.
-  --log LOGLEVEL        Change your log level.
- ```
   
   Once you've got the config file set up you should be all set. 
   Don't forget to set a cron schedule mines <br>`*/30 * * * *` <-- Runs every 30 min
