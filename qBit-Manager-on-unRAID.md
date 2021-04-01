@@ -109,7 +109,7 @@ However, at the core you'll want
 ```
 python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -l /<path to where you want log file>/activity.log
 ```
-if you want to change the arguments such as the `-ms` a full list of arguments can be seen below
+if you want to change the arguments such as the `-ms` a full list of arguments can be seen by using the `-h` command.
 
   
   Once you've got the config file set up you should be all set. 
