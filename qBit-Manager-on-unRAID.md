@@ -41,7 +41,8 @@ Now to set a schedule for this bash script to run.
 Select **At First Array Start Only** This will run this script every time the array starts on every boot
 
 Now we need to edit the config file that came with the zip file.
-The config file should be pretty self explanitory. The only thing that must be followed is that **ALL** categories that you see in your qBit **MUST** be added to the config file with associated directories, each directory must be unique for each category.
+<br>The config file should be pretty self-explanatory. 
+<br>The only thing that must be followed is that **ALL** categories that you see in your qBit **MUST** be added to the config file with associated directories, each directory must be unique for each category.
 
 > If you'd like a guide on setting up cross-seed on unRAID please visit [here](https://github.com/Drazzilb08/cross-seed-guide)
   
