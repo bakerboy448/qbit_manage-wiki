@@ -1,6 +1,6 @@
 Here we are going to talk about using qBit Manager on unRAID
 
-## qBit Management
+# qBit Management
 First we are going to need [Nerd Pack](https://forums.unraid.net/topic/35866-unraid-6-nerdpack-cli-tools-iftop-iotop-screen-kbd-etc/). <br>
 This can be also download from the **Apps** store
 
