@@ -1,8 +1,8 @@
 Here we are going to talk about using qBit Manager on unRAID
 
-# qBit Management
-First we are going to need [Nerd Pack](https://forums.unraid.net/topic/35866-unraid-6-nerdpack-cli-tools-iftop-iotop-screen-kbd-etc/). <br>
-This can be also download from the **Apps** store
+**qBit Management**
+First, we are going to need [Nerd Pack](https://forums.unraid.net/topic/35866-unraid-6-nerdpack-cli-tools-iftop-iotop-screen-kbd-etc/). <br>
+This can be also downloaded from the **Apps** store
 
 Nerd pack will be located in the settings tab
 When you open it up you'll see a bunch of packages that you can install. <br> We'll need:
@@ -50,15 +50,15 @@ Now we need to go back to **User Scripts** and create our script to run this scr
 
 **Add a new script**
 
-  You can name yours something like: `auto-manage-qbittorrent`
-  Here is man example script:
+  You can name yours something like `auto-manage-qbittorrent`
+  Here is an example script:
   ```bash
   #!/bin/bash
 echo "Running qBitTorrent Management"
 python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -ms -l /mnt/user/data/scripts/qbit/activity.log
 echo "qBitTorrent Management Completed"
 ```
-However, at the core you'll want 
+However, at the core, you'll want 
 ```
 python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -l /<path to where you want log file>/activity.log
 ```
