@@ -119,7 +119,7 @@ if you want to change the arguments such as the `-ms` a full list of arguments c
 **Final note:**<br>
 If you're wanting to do a test run please use the `--dry-run` argument anywhere w/in the call to test how things will look. Please do this before running a full run.
 
-# Other Local Installations
+# Local Installations
 
 * Requires `python 3`. Dependencies must be installed by running:
 
