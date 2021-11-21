@@ -1,4 +1,4 @@
-### *Nix Installation
+Nix Installation
 
 * Download the script
 
