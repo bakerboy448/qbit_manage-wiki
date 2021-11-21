@@ -9,6 +9,22 @@ If there are issues installing dependencies try:
 ```bash
 pip install -r requirements.txt --ignore-installed
 ```
+
+## Usage
+
+To run the script in an interactive terminal run:
+
+* copy the `config.yml.sample` file to `config.yml`
+* add your qBittorrent host, user, and pass. If you are not using a username and password you can remove the `user` and `pass` lines.
+* add your `cross_seed` and `root_dir`. If you are using a docker container you must fill out `remote_dir` as well.
+* Add your categories and save path to match with what is being used in your qBittorrent instance. I suggest using the full path when defining `save_path`
+* Add the `tag` definition based on tracker URL
+* Modify the  `nohardlinks` by specifying your completed movies/series category to match with qBittorrent. Please ensure the `root_dir` and/or  `remote_dir` is added in the `directory` section
+* To run the script in an interactive terminal with a list of possible commands run:
+
+```bash
+python qbit_manage.py -h
+```
 ## Commands
 
 | Shell Command | Description | Default Value |
@@ -20,11 +36,11 @@ pip install -r requirements.txt --ignore-installed
 | `-re` or `--recheck` | Recheck paused torrents sorted by lowest size. Resume if Completed.  |  |
 | `-g` or `--cat-update` |  Use this if you would like to update your categories.  |  |
 | `-t` or `--tag-update` |  Use this if you would like to update your tags. (Only adds tags to untagged torrents) |  |
-| `-r` or `--rem-unregistered` |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data) |  |
+| `-r` or `--rem-unregistered` |  Use this if you would like to remove unregistered torrents. (It will delete data & torrent if it is not being cross-seeded, otherwise, it will just remove the torrent without deleting data) |  |
 | `-ro` or `--rem-orphaned` | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. |  |
-| `-tnhl` or `--tag-nohardlinks` | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag noHL. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. |  |
-| `--dry-run` |   If you would like to see what is gonna happen but not actually move/delete or tag/categorize anything. |  |
-| `--log LOGLEVEL` |   Change the ouput log level. | INFO |
+| `-tnhl` or `--tag-nohardlinks` | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag now. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. |  |
+| `--dry-run` |   If you would like to see what is gonna happen but not move/delete or tag/categorize anything. |  |
+| `--log LOGLEVEL` |   Change the output log level. | INFO |
 
 ### Config
 
