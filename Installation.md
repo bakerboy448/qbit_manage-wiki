@@ -1,3 +1,5 @@
+# Installation Table of Contents
+
  - [Installation](https://github.com/StuffAnThings/qbit_manage/wiki/Installation)
      - [unRAID Installation](https://github.com/StuffAnThings/qbit_manage/wiki/Unraid-Installation)
      - [Local Installation](https://github.com/StuffAnThings/qbit_manage/wiki/Local-Installations)
