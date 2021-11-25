@@ -1,6 +1,6 @@
 Docker Installation
 
-A simple Dockerfile is available in this repo if you'd like to build it yourself. The official build is also available from dockerhub [here]:(https://hub.docker.com/r/bobokun/qbit_manage) <br>
+A simple Dockerfile is available in this repo if you'd like to build it yourself. The official build is also available from dockerhub [here](https://hub.docker.com/r/bobokun/qbit_manage): <br>
 
 `docker run -it -v <PATH_TO_CONFIG>:/config:rw bobokun/qbit_manage`
 
