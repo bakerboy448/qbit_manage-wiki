@@ -1,1 +1,91 @@
 Docker Installation
+
+A simple Dockerfile is available in this repo if you'd like to build it yourself. The official build is also available from dockerhub here:[here](https://hub.docker.com/r/bobokun/qbit_manage) <br>
+
+`docker run -it -v <PATH_TO_CONFIG>:/config:rw bobokun/qbit_manage`
+
+* The -it allows you to interact with the script when needed.
+  * For example, it's required in order to go through the OAuth flow while connecting to Trakt or MyAnimeList.
+
+* The -v <PATH_TO_CONFIG>:/config:rw mounts the location you choose as a persistent volume to store your files.
+  * Change <PATH_TO_CONFIG> to a folder where your config.yml and other files are.
+  * The docker image defaults to running the config named config.yml in your persistent volume.
+  * Use quotes around the whole thing if your path has spaces i.e. -v "<PATH_TO_CONFIG>:/config:rw"
+
+Below is a list of the docker enviroment variables
+| Docker Environment Variable |Description | Default Value |
+| :------------  | :------------ | :------------ |
+| QBT_RUN |Run without the scheduler. Script will exit after completion. | False |
+| QBT_SCHEDULE  | Schedule to run every x minutes. (Default set to 30)  | 30 |
+| QBT_CONFIG  | This is used if you want to use a different name for your config.yml. `Example: tv.yml`  | config.yml |
+| QBT_LOGFILE | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
+| QBT_CROSS_SEED | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  | False |
+| QBT_RECHECK | Recheck paused torrents sorted by lowest size. Resume if Completed.  | False |
+| QBT_CAT_UPDATE |  Use this if you would like to update your categories.  | False |
+| QBT_TAG_UPDATE |  Use this if you would like to update your tags. (Only adds tags to untagged torrents) | False |
+| QBT_REM_UNREGISTERED |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data) | False |
+| QBT_REM_ORPHANED | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. | False |
+| QBT_TAG_NOHARDLINKS | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag noHL. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. | False |
+| QBT_SKIP_RECYCLE | Use this to skip emptying the Reycle Bin folder (`/root_dir/.RecycleBin`). | False |
+| QBT_DRY_RUN |   If you would like to see what is gonna happen but not actually move/delete or tag/categorize anything. | False |
+| QBT_LOG_LEVEL |   Change the ouput log level. | INFO |
+| QBT_DIVIDER |   Character that divides the sections (Default: '=') | = |
+| QBT_WIDTH |   Screen Width (Default: 100) | 100 |
+
+
+Here is an example of a docker compose
+```yaml
+version: "3"
+services:
+  qbit_manage:
+    container_name: qbit_manage
+    entrypoint:
+      - python3
+      - qbit_manage.py
+    environment:
+      - QBT_REM_ORPHANED=false
+      - QBT_LOG_LEVEL=INFO
+      - QBT_WIDTH=100
+      - QBT_TAG_UPDATE=true
+      - QBT_CROSS_SEED=false
+      - QBT_REM_UNREGISTERED=false
+      - QBT_DRY_RUN=false
+      - QBT_CONFIG=config.yml
+      - QBT_SCHEDULE=30
+      - QBT_LOGFILE=activity.log
+      - QBT_RECHECK=false
+      - QBT_CAT_UPDATE=false
+      - QBT_SKIP_RECYCLE=false
+      - QBT_DIVIDER==
+      - HOST_OS=Unraid
+      - QBT_TAG_NOHARDLINKS=true
+      - TZ=America/Los_Angeles
+      - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - LANG=C.UTF-8
+      - GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
+      - PYTHON_VERSION=3.9.9
+      - PYTHON_PIP_VERSION=21.2.4
+      - PYTHON_SETUPTOOLS_VERSION=57.5.0
+      - PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py
+      - PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309
+    hostname: 61fc22ad3b39
+    image: bobokun/qbit_manage
+    ipc: private
+    logging:
+      driver: json-file
+      options:
+        max-file: 1
+        max-size: 50m
+    networks:
+      - internal
+    restart: unless-stopped
+    volumes:
+      - /mnt/user/appdata/qbit_manage/:/config:rw
+      - /mnt/user/data:/data:rw
+networks:
+  internal:
+    external: true
+```
+You will also need to define not just the config volume but the volume to your torrents, this is in order to use the recycling bin, remove orphans and the no hard link options
+
+Here we have `/mnt/user/data` mapd to `/data` furthermore in the config file associated with it the root_dir is mapped to `/data/.torrents/`
