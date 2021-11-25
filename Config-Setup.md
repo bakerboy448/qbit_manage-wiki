@@ -1,5 +1,5 @@
 
-# Overeview
+# Overview
 The script utilizes a YAML config file to load information to connect to the various APIs you can connect with.
 
 By default, the script looks at /config/config.yml for the Configuration File unless otherwise specified.
