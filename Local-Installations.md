@@ -7,6 +7,7 @@ Clone the repo
 git clone https://github.com/StuffAnThings/qbit_manage
 ```
 
+Install requirements
 ```bash
 pip install -r requirements.txt
 ```
