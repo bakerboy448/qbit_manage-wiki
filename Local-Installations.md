@@ -25,6 +25,7 @@ To run the script in an interactive terminal run:
 * copy the `config.yml.sample` file to `config.yml`
 * Fill out the config file as outlined in the [Config-Setup](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)
 
+Run the script `-h` to see a list of commands
 ```bash
 python qbit_manage.py -h
 ```
