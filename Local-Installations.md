@@ -1,5 +1,12 @@
 * Requires `python 3`. Dependencies must be installed by running:
 
+Navigate to the directory you'd liked to clone the repo into
+
+Clone the repo
+```bash
+git clone https://github.com/StuffAnThings/qbit_manage
+```
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -15,33 +22,31 @@ pip install -r requirements.txt --ignore-installed
 To run the script in an interactive terminal run:
 
 * copy the `config.yml.sample` file to `config.yml`
-* add your qBittorrent host, user, and pass. If you are not using a username and password you can remove the `user` and `pass` lines.
-* add your `cross_seed` and `root_dir`. If you are using a docker container you must fill out `remote_dir` as well.
-* Add your categories and save path to match with what is being used in your qBittorrent instance. I suggest using the full path when defining `save_path`
-* Add the `tag` definition based on tracker URL
-* Modify the  `nohardlinks` by specifying your completed movies/series category to match with qBittorrent. Please ensure the `root_dir` and/or  `remote_dir` is added in the `directory` section
-* To run the script in an interactive terminal with a list of possible commands run:
+* Fill out the config file as outlined in the [Config-Setup](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)
 
 ```bash
 python qbit_manage.py -h
 ```
 ## Commands
 
-| Shell Command | Description | Default Value |
-| :------------ | :------------  | :------------ |
-| `-c CONFIG` or `--config-file CONFIG`  | This is used if you want to use a different name for your config.yml. `Example: tv.yml`  | config.yml |
-| `-l LOGFILE,` or `--log-file LOGFILE,` | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
-| `-m` or `--manage` | Use this if you would like to update your tags, categories, remove unregistered torrents, AND recheck/resume paused torrents.  |  |
-| `-s` or `--cross-seed` | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  |  |
-| `-re` or `--recheck` | Recheck paused torrents sorted by lowest size. Resume if Completed.  |  |
-| `-g` or `--cat-update` |  Use this if you would like to update your categories.  |  |
-| `-t` or `--tag-update` |  Use this if you would like to update your tags. (Only adds tags to untagged torrents) |  |
-| `-r` or `--rem-unregistered` |  Use this if you would like to remove unregistered torrents. (It will delete data & torrent if it is not being cross-seeded, otherwise, it will just remove the torrent without deleting data) |  |
-| `-ro` or `--rem-orphaned` | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. |  |
-| `-tnhl` or `--tag-nohardlinks` | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag now. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. |  |
-| `--dry-run` |   If you would like to see what is gonna happen but not move/delete or tag/categorize anything. |  |
-| `--log LOGLEVEL` |   Change the output log level. | INFO |
-
+| Shell Command |Docker Environment Variable |Description | Default Value |
+| :------------ | :------------  | :------------ | :------------ |
+| `-r` or`--run` | QBT_RUN |Run without the scheduler. Script will exit after completion. | False |
+| `-sch` or `--schedule` | QBT_SCHEDULE  | Schedule to run every x minutes. (Default set to 30)  | 30 |
+| `-c CONFIG` or `--config-file CONFIG` | QBT_CONFIG  | This is used if you want to use a different name for your config.yml. `Example: tv.yml`  | config.yml |
+| `-lf LOGFILE,` or `--log-file LOGFILE,` | QBT_LOGFILE | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
+| `-cs` or `--cross-seed` | QBT_CROSS_SEED | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  | False |
+| `-re` or `--recheck` | QBT_RECHECK | Recheck paused torrents sorted by lowest size. Resume if Completed.  | False |
+| `-cu` or `--cat-update` | QBT_CAT_UPDATE |  Use this if you would like to update your categories.  | False |
+| `-tu` or `--tag-update` | QBT_TAG_UPDATE |  Use this if you would like to update your tags. (Only adds tags to untagged torrents) | False |
+| `-ru` or `--rem-unregistered` | QBT_REM_UNREGISTERED |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data) | False |
+| `-ro` or `--rem-orphaned` | QBT_REM_ORPHANED | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. | False |
+| `-tnhl` or `--tag-nohardlinks` | QBT_TAG_NOHARDLINKS | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag noHL. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. | False |
+| `-sr` or `--skip-recycle` | QBT_SKIP_RECYCLE | Use this to skip emptying the Reycle Bin folder (`/root_dir/.RecycleBin`). | False |
+| `-dr` or `--dry-run` | QBT_DRY_RUN |   If you would like to see what is gonna happen but not actually move/delete or tag/categorize anything. | False |
+| `-ll` or `--log-level LOGLEVEL` | QBT_LOG_LEVEL |   Change the ouput log level. | INFO |
+| `-d` or `--divider` | QBT_DIVIDER |   Character that divides the sections (Default: '=') | = |
+| `-w` or `--width` | QBT_WIDTH |   Screen Width (Default: 100) | 100 |
 ### Config
 
 To choose the location of the YAML config file
