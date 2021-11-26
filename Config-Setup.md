@@ -1,5 +1,5 @@
 
-# Overeview
+# Overview
 The script utilizes a YAML config file to load information to connect to the various APIs you can connect with.
 
 By default, the script looks at /config/config.yml for the Configuration File unless otherwise specified.
@@ -174,6 +174,7 @@ If you're needing information regarding hardlinks here are some excellent resour
   > Note: Seed time is in minutes
 
   ### **recyclebin:**
+---
   Recycle Bin method of deletion will move files into the recycle bin (Located in /root_dir/.RecycleBin) instead of directly deleting them in qbit. 
 
   This is very useful if you're hesitant about using this script to delete information off your system hingswithout first checking it. Plus with the ability of this script to remove trumped/unregistered torrents there is a very small chance that something may happen to cause the script to go to town on  your library. With the recycling bin in place your data is secure (unless the bin is emptied before this issue is caught). All you'd need to do to recover would be to place the data back into the correct directory, redownload the torrent file from the tracker and recheck the torrent with the tracker from the UI. 
@@ -186,6 +187,7 @@ If you're needing information regarding hardlinks here are some excellent resour
 > Note: The more time you place for the `empty_after_x_days:` variable the better, allowing you more time to catch any mistakes by the script. 
 
 ### **orphaned:**
+---
 This section allows for the exclusion of certain files from being considered "Orphaned"
 
 This is handy when you have automatically generated files that certain OSs decide to make. `.DS_Store` Is a primary example, for those who use MacOS.
