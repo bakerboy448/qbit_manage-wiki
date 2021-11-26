@@ -1,3 +1,19 @@
+
+# Unraid Installation - Docker
+Thankfully, getting qbit_manager working on unRAID is a fairly simple task. unRAID works mostly with docker containers, so the pre-built container available on docker hub works perfectly with a little configuration. To install a container from docker hub, you will need community applications - a very popular plugin for unRAID servers. If you don't already have this installed, you can install it [here](https://forums.unraid.net/topic/38582-plug-in-community-applications/)
+
+## Basic Installation
+1. Head to the Apps tab of unRAID (Community Applications), and search qbit_manage in the upper left search box. 
+2. Once you have searched for qbit_manage you can simply select it from the list of containers and select install.
+3. The template should show all variables that can be edited.
+4. Fill out your desired location for your application data.
+5. Fill out your location for all your download folders.
+6. Select what options you want to enable or disable (true/false).
+   <Insert Image here>
+7. Hit Apply, and allow unRAID to download the docker container.
+8. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
+9.  Create config.yml and library.yml files as-per the documentation in the Host Path you set (/mnt/user/appdata/qbit_manage in the example)
+10. Once finished, run the container. Voila! Logs are located in yourhostpath/logs.
 # Unraid Installation localhost
 Here we are going to talk about using qBit Manager on unRAID
 
@@ -71,7 +87,3 @@ if you want to change the arguments such as the `-ms` a full list of arguments c
   
 **Final note:**<br>
 If you're wanting to do a test run please use the `--dry-run` argument anywhere w/in the call to test how things will look. Please do this before running a full run.
-
-# Unraid Installation - Docker
-
-
