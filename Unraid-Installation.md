@@ -6,14 +6,12 @@ Thankfully, getting qbit_manager working on unRAID is a fairly simple task. unRA
 1. Head to the Apps tab of unRAID (Community Applications), and search qbit_manage in the upper left search box. 
 2. Once you have searched for qbit_manage you can simply select it from the list of containers and select install.
 3. The template should show all variables that can be edited.
-4. Fill out your desired location for your application data.
-5. Fill out your location for all your download folders.
-6. Select what options you want to enable or disable (true/false).
->Insert Image here
+5. Fill out your location for your downloads downloads folder (`Root_Dir`).
+6. Select what QBT env options you want to enable or disable (true/false).
 7. Hit Apply, and allow unRAID to download the docker container.
 8. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
-9.  Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)in the Host Path you set (/mnt/user/appdata/qbit_manage in the example)
-10. Once finished, run the container. Voila! Logs are located in yourhostpath/logs.
+9. Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup) and place in the Appdata folder (`/mnt/user/appdata/qbit_manage/` in the example) **Remember to remove the .sample from the filename**
+10. Once finished, run the container. Voila! Logs are located in `/mnt/user/appdata/qbit_manage/logs`.
 # Unraid Installation localhost
 Here we are going to talk about using qBit Manager on unRAID
 
