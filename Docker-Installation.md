@@ -35,47 +35,36 @@ Below is a list of the docker enviroment variables
 
 Here is an example of a docker compose
 ```yaml
-version: "3"
+version: "3.7"
 services:
   qbit_manage:
     container_name: qbit_manage
+    image: bobokun/qbit_manage
     entrypoint:
       - python3
       - qbit_manage.py
-    environment:
-      - QBT_REM_ORPHANED=false
-      - QBT_LOG_LEVEL=INFO
-      - QBT_WIDTH=100
-      - QBT_TAG_UPDATE=true
-      - QBT_CROSS_SEED=false
-      - QBT_REM_UNREGISTERED=false
-      - QBT_DRY_RUN=false
-      - QBT_CONFIG=config.yml
-      - QBT_SCHEDULE=30
-      - QBT_LOGFILE=activity.log
-      - QBT_RECHECK=false
-      - QBT_CAT_UPDATE=false
-      - QBT_SKIP_RECYCLE=false
-      - QBT_DIVIDER==
-      - HOST_OS=Unraid
-      - QBT_TAG_NOHARDLINKS=true
-    image: bobokun/qbit_manage
-    ipc: private
-    logging:
-      driver: json-file
-      options:
-        max-file: 1
-        max-size: 50m
-    networks:
-      - internal
-    restart: unless-stopped
     volumes:
       - /mnt/user/appdata/qbit_manage/:/config:rw
-      - /mnt/user/data:/data:rw
-networks:
-  internal:
-    external: true
+      - /mnt/user/data/torrents/:/data/torrents:rw
+    environment:
+      - QBT_RUN=false
+      - QBT_SCHEDULE=false
+      - QBT_CONFIG=config.yml
+      - QBT_LOGFILE=activity.log
+      - QBT_CROSS_SEED=false
+      - QBT_RECHECK=false
+      - QBT_CAT_UPDATE=false
+      - QBT_TAG_UPDATE=false
+      - QBT_REM_UNREGISTERED=false
+      - QBT_REM_ORPHANED=false
+      - QBT_TAG_NOHARDLINKS=false
+      - QBT_SKIP_RECYCLE=false
+      - QBT_DRY_RUN=false
+      - QBT_LOG_LEVEL=INFO
+      - QBT_DIVIDER==
+      - QBT_WIDTH=100
+    restart: unless-stopped
 ```
 You will also need to define not just the config volume but the volume to your torrents, this is in order to use the recycling bin, remove orphans and the no hard link options
 
-Here we have `/mnt/user/data` mapd to `/data` furthermore in the config file associated with it the root_dir is mapped to `/data/.torrents/`
+Here we have `/mnt/user/data/torrents/` mapped to `/data/torrents/` furthermore in the config file associated with it the root_dir is mapped to `/data/torrents/`
