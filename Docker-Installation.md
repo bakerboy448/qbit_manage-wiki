@@ -48,7 +48,7 @@ services:
       - /mnt/user/data/torrents/:/data/torrents:rw
     environment:
       - QBT_RUN=false
-      - QBT_SCHEDULE=false
+      - QBT_SCHEDULE=30
       - QBT_CONFIG=config.yml
       - QBT_LOGFILE=activity.log
       - QBT_CROSS_SEED=false
