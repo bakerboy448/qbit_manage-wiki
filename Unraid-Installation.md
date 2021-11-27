@@ -70,12 +70,12 @@ Now we need to go back to **User Scripts** and create our script to run this scr
   ```bash
   #!/bin/bash
 echo "Running qBitTorrent Management"
-python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -ms -l /mnt/user/data/scripts/qbit/activity.log
+python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -l /mnt/user/data/scripts/qbit/activity.log -r `<add additional arguments here>`
 echo "qBitTorrent Management Completed"
 ```
 However, at the core, you'll want 
 ```
-python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -r -<list of commands> -l /<path to where you want log file>/activity.log
+python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -l /<path to where you want log file>/activity.log -r -<list of commands>
 ```
 if you want to change the arguments in the `<list of commands>`. The full list of arguments can be seen by using the `-h` command or on the README.
 
