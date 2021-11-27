@@ -70,7 +70,7 @@ Now we need to go back to **User Scripts** and create our script to run this scr
   ```bash
   #!/bin/bash
 echo "Running qBitTorrent Management"
-python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -l /mnt/user/data/scripts/qbit/activity.log -r `<add additional arguments here>`
+python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -l /mnt/user/data/scripts/qbit/activity.log -r -<list of commands>
 echo "qBitTorrent Management Completed"
 ```
 However, at the core, you'll want 
