@@ -75,9 +75,9 @@ echo "qBitTorrent Management Completed"
 ```
 However, at the core, you'll want 
 ```
-python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -l /<path to where you want log file>/activity.log
+python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -r -<list of commands> -l /<path to where you want log file>/activity.log
 ```
-if you want to change the arguments such as the `-ms` a full list of arguments can be seen by using the `-h` command.
+if you want to change the arguments in the `<list of commands>`. The full list of arguments can be seen by using the `-h` command or on the README.
 
   
   Once you've got the config file set up you should be all set. 
