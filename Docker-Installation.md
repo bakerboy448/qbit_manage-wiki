@@ -59,16 +59,6 @@ services:
       - QBT_DIVIDER==
       - HOST_OS=Unraid
       - QBT_TAG_NOHARDLINKS=true
-      - TZ=America/Los_Angeles
-      - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      - LANG=C.UTF-8
-      - GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
-      - PYTHON_VERSION=3.9.9
-      - PYTHON_PIP_VERSION=21.2.4
-      - PYTHON_SETUPTOOLS_VERSION=57.5.0
-      - PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py
-      - PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309
-    hostname: 61fc22ad3b39
     image: bobokun/qbit_manage
     ipc: private
     logging:
