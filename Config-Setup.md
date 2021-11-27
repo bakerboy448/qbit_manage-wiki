@@ -4,7 +4,7 @@ The script utilizes a YAML config file to load information to connect to the var
 
 By default, the script looks at /config/config.yml for the Configuration File unless otherwise specified.
 
-A template Configuration File can be found in the repo [config/config.yml.template](https://github.com/StuffAnThings/qbit_manage/blob/master/config/config.yml.sample).
+A template Configuration File can be found in the repo [config/config.yml.sample](https://github.com/StuffAnThings/qbit_manage/blob/master/config/config.yml.sample).
 
 **WARNING** <br>
 > As this software is constantly evolving and this wiki might not be up to date the sample shown here might not might not be current. Please referr to the repo for the most current version.

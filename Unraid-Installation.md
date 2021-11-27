@@ -1,19 +1,17 @@
 
-# Unraid Installation - Docker
+# Unraid Installation - Docker (Recommended)
 Thankfully, getting qbit_manager working on unRAID is a fairly simple task. unRAID works mostly with docker containers, so the pre-built container available on docker hub works perfectly with a little configuration. To install a container from docker hub, you will need community applications - a very popular plugin for unRAID servers. If you don't already have this installed, you can install it [here](https://forums.unraid.net/topic/38582-plug-in-community-applications/)
 
 ## Basic Installation
 1. Head to the Apps tab of unRAID (Community Applications), and search qbit_manage in the upper left search box. 
 2. Once you have searched for qbit_manage you can simply select it from the list of containers and select install.
 3. The template should show all variables that can be edited.
-4. Fill out your desired location for your application data.
-5. Fill out your location for all your download folders.
-6. Select what options you want to enable or disable (true/false).
->Insert Image here
+5. Fill out your location for your downloads downloads folder (`Root_Dir`).
+6. Select what QBT env options you want to enable or disable (true/false).
 7. Hit Apply, and allow unRAID to download the docker container.
 8. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
-9.  Create config.yml files as-per the documentation in the Host Path you set (/mnt/user/appdata/qbit_manage in the example)
-10. Once finished, run the container. Voila! Logs are located in yourhostpath/logs.
+9. Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup) and place in the Appdata folder (`/mnt/user/appdata/qbit_manage/` in the example) **Remember to remove the .sample from the filename**
+10. Once finished, run the container. Voila! Logs are located in `/mnt/user/appdata/qbit_manage/logs`.
 # Unraid Installation localhost
 Here we are going to talk about using qBit Manager on unRAID
 
@@ -72,14 +70,14 @@ Now we need to go back to **User Scripts** and create our script to run this scr
   ```bash
   #!/bin/bash
 echo "Running qBitTorrent Management"
-python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -ms -l /mnt/user/data/scripts/qbit/activity.log
+python3 /mnt/user/data/scripts/qbit/qbit_manage.py -c /mnt/user/data/scripts/qbit/config.yml -l /mnt/user/data/scripts/qbit/activity.log -r -<list of commands>
 echo "qBitTorrent Management Completed"
 ```
 However, at the core, you'll want 
 ```
-python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -ms -l /<path to where you want log file>/activity.log
+python3 /<path to script>/qbit_manage.py -c /<path to config>/config.yml -l /<path to where you want log file>/activity.log -r -<list of commands>
 ```
-if you want to change the arguments such as the `-ms` a full list of arguments can be seen by using the `-h` command.
+if you want to change the arguments in the `<list of commands>`. The full list of arguments can be seen by using the `-h` command or on the README.
 
   
   Once you've got the config file set up you should be all set. 
