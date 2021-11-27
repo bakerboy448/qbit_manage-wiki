@@ -40,9 +40,6 @@ services:
   qbit_manage:
     container_name: qbit_manage
     image: bobokun/qbit_manage
-    entrypoint:
-      - python3
-      - qbit_manage.py
     volumes:
       - /mnt/user/appdata/qbit_manage/:/config:rw
       - /mnt/user/data/torrents/:/data/torrents:rw
