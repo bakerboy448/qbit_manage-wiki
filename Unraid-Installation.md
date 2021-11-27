@@ -12,7 +12,7 @@ Thankfully, getting qbit_manager working on unRAID is a fairly simple task. unRA
 >Insert Image here
 7. Hit Apply, and allow unRAID to download the docker container.
 8. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
-9.  Create config.yml files as-per the documentation in the Host Path you set (/mnt/user/appdata/qbit_manage in the example)
+9.  Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)in the Host Path you set (/mnt/user/appdata/qbit_manage in the example)
 10. Once finished, run the container. Voila! Logs are located in yourhostpath/logs.
 # Unraid Installation localhost
 Here we are going to talk about using qBit Manager on unRAID
