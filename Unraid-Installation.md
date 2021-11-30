@@ -6,12 +6,19 @@ Thankfully, getting qbit_manager working on unRAID is a fairly simple task. unRA
 1. Head to the Apps tab of unRAID (Community Applications), and search qbit_manage in the upper left search box. 
 2. Once you have searched for qbit_manage you can simply select it from the list of containers and select install.
 3. The template should show all variables that can be edited.
-5. Fill out your location for your downloads downloads folder (`Root_Dir`).
-6. Select what QBT env options you want to enable or disable (true/false).
-7. Hit Apply, and allow unRAID to download the docker container.
-8. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
-9. Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup) and place in the Appdata folder (`/mnt/user/appdata/qbit_manage/` in the example) **Remember to remove the .sample from the filename**
-10. Once finished, run the container. Voila! Logs are located in `/mnt/user/appdata/qbit_manage/logs`.
+4. Fill out your location for your downloads downloads folder (`Root_Dir`).
+   1. qbit_manage needs to be able to view all torrents the way that your qbittorrent views them. 
+      1. Example: If you have qbittorrent mapped to `/mnt/user/data/:/data` This means that you **MUST** have qbit_managed mapped the same way.
+      2. Furthermore, the config file must map the root directory you wish to monitor. This means that in our example of `/data` (which is how qbittorrent views the torrents) that if in your `/data` directory you drill down to `/torrents` that you'll need to update your config file to `/data/torrents`
+   2. This could be different depending on your specific setup.
+   3. The key takeaways are 
+      1. Both qbit_manage needs to have the same mappings as qbittorrent
+      2. The config file needs to drill down (if required) further to the desired root dir.
+5. Select what QBT env options you want to enable or disable (true/false).
+6. Hit Apply, and allow unRAID to download the docker container.
+7. Navigate to the Docker tab in unRAID, and stop the qbit_manage container if it has auto-started.
+8.  Create the [config.yml](https://github.com/StuffAnThings/qbit_manage/blob/master/config/config.yml.sample) file as-per the [config-setup documentation](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup) and place in the Appdata folder (`/mnt/user/appdata/qbit_manage/` in the example) **Remember to remove the .sample from the filename**
+9.  Once finished, run the container. Voila! Logs are located in `/mnt/user/appdata/qbit_manage/logs`.
 # Unraid Installation localhost
 Here we are going to talk about using qBit Manager on unRAID
 
