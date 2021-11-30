@@ -12,6 +12,15 @@ A simple Dockerfile is available in this repo if you'd like to build it yourself
   * The docker image defaults to running the config named config.yml in your persistent volume.
   * Use quotes around the whole thing if your path has spaces i.e. -v "<PATH_TO_CONFIG>:/config:rw"
 
+* Fill out your location for your downloads downloads folder (`Root_Dir`).
+   1. qbit_manage needs to be able to view all torrents the way that your qbittorrent views them. 
+      1. Example: If you have qbittorrent mapped to `/mnt/user/data/:/data` This means that you **MUST** have qbit_managed mapped the same way.
+      2. Furthermore, the config file must map the root directory you wish to monitor. This means that in our example of `/data` (which is how qbittorrent views the torrents) that if in your `/data` directory you drill down to `/torrents` that you'll need to update your config file to `/data/torrents`
+   2. This could be different depending on your specific setup.
+   3. The key takeaways are 
+      1. Both qbit_manage needs to have the same mappings as qbittorrent
+      2. The config file needs to drill down (if required) further to the desired root dir.
+
 Below is a list of the docker enviroment variables
 | Docker Environment Variable |Description | Default Value |
 | :------------  | :------------ | :------------ |
