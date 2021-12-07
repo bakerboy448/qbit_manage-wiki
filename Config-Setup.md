@@ -125,7 +125,7 @@ This section defines the directories that qbit_manage will be looking into for v
 | :------------ | :------------  |
 | `cross_seed:` | Output directory of cross-seed, originally the application [cross-seed](https://github.com/mmgoodnow/cross-seed) was incapable of injecting cross-seed torrent into qB, this was built to inject them for the applicaiton. This is no longer required if you're using injects with that software. However, you can find othere uses for this as it is more of a watch directory now.|
 | `root_dir` | Root downloads directory used to check for orphaned files, noHL, and RecycleBin. This directory is where you place all your downloads. This will need to be how qB views the directory where it places the downloads. This is required if you're using qbit_managee and/or qBittorrent within a container.|
-| `remote_dir` | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host. 
+| `remote_dir` | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally (not required if running qbit_manage in a container) and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host. 
 
 ## **cat:**
 ---

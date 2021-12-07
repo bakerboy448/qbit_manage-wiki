@@ -20,6 +20,7 @@ A simple Dockerfile is available in this repo if you'd like to build it yourself
    3. The key takeaways are 
       1. Both qbit_manage needs to have the same mappings as qbittorrent
       2. The config file needs to drill down (if required) further to the desired root dir.
+* `remote_dir`: is not required and can be commented out with `#` 
 
 Below is a list of the docker enviroment variables
 | Docker Environment Variable |Description | Default Value |
