@@ -1,5 +1,3 @@
-## Commands
-
 | Shell Command |Docker Environment Variable |Description | Default Value |
 | :------------ | :------------  | :------------ | :------------ |
 | `-r` or`--run` | QBT_RUN |Run without the scheduler. Script will exit after completion. | False |
