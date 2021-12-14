@@ -5,3 +5,4 @@
           - [NIX Installation](https://github.com/StuffAnThings/qbit_manage/wiki/Nix-Installation)
           - [Docker Installation](https://github.com/StuffAnThings/qbit_manage/wiki/Docker-Installation)
      - [Config Setup](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)
+     - [Commands](https://github.com/StuffAnThings/qbit_manage/wiki/Commands)
