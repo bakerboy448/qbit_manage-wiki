@@ -211,9 +211,9 @@ If you're needing information regarding hardlinks here are some excellent resour
 * [Trash-Guides: Hardlinks and Instant Moves (Atomic-Moves)](https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/) 
 * [Wikipedia: Hardlinks](https://en.wikipedia.org/wiki/Hard_link)
 <br>
- Mandatory to fill out [directory parameter](#directory) above to use this function (root_dir/remote_dir) <br>
-  
-  Beyond this you'll need to use one of the [categories](#cat) above as the key, and should be pointed to the `completed-` directory of your torrents.
+Mandatory to fill out [directory parameter](#directory) above to use this function (root_dir/remote_dir)   
+<br>
+Beyond this you'll need to use one of the [categories](#cat) above as the key, and should be pointed to the `completed-` directory of your torrents.
 
 | Configuration | Definition | Required
 | :------------ | :------------  | :------------
