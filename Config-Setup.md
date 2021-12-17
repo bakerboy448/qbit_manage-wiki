@@ -59,7 +59,7 @@ tags:
     tag: Blutopia
   cartoonchaos:
     tag: CartoonChaos
-  digitalcore
+  digitalcore:
     tag: DigitalCore
     max_ratio: 5.0
   gazellegames:
