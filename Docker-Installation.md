@@ -5,7 +5,6 @@ A simple Dockerfile is available in this repo if you'd like to build it yourself
 `docker run -it -v <PATH_TO_CONFIG>:/config:rw bobokun/qbit_manage`
 
 * The -it allows you to interact with the script when needed.
-  * For example, it's required in order to go through the OAuth flow while connecting to Trakt or MyAnimeList.
 
 * The -v <PATH_TO_CONFIG>:/config:rw mounts the location you choose as a persistent volume to store your files.
   * Change <PATH_TO_CONFIG> to a folder where your config.yml and other files are.
