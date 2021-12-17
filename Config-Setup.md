@@ -270,7 +270,7 @@ This is handy when you have automatically generated files that certain OSs decid
 
 
 <br><br><br><br><br>
-##*---FEATURE CURRENTLY IN DEVELOP BRANCH---*
+# *---FEATURE CURRENTLY IN DEVELOP BRANCH---*
 
 ## **notifiarr:**
 ---
@@ -299,9 +299,7 @@ Provide webhook notifications based on event triggers
 |[empty_recyclebin](#empty-recycle-bin-notifications)| When files are deleted from the Recycle Bin | N/A | <center>❌</center>
 
 
-
-### JSON Payloads
-#### **Error Notifications**
+### **Error Notifications**
 Payload will be sent on any errors
 ```yaml
 {
@@ -311,7 +309,7 @@ Payload will be sent on any errors
   "critical": bool             // Critical Error
 }
 ```
-#### **Run Start Notifications**
+### **Run Start Notifications**
 Payload will be sent at the start of the run
 ```yaml
 {
@@ -321,7 +319,7 @@ Payload will be sent at the start of the run
   "dry_run": bool              // Dry-Run
 }
 ```
-#### **Run End Notifications**
+### **Run End Notifications**
 Payload will be sent at the end of the run
 ```yaml
 {
@@ -345,7 +343,7 @@ Payload will be sent at the end of the run
 }
 ```
 
-#### **Cross-Seed Notifications**
+### **Cross-Seed Notifications**
 Payload will be sent when adding a cross-seed torrent to qBittorrent if the original torrent is complete
 ```yaml
 {
@@ -367,7 +365,7 @@ Payload will be sent when there are existing torrents found that are missing the
 }
 ```
 
-#### **Recheck Notifications**
+### **Recheck Notifications**
 Payload will be sent when rechecking/resuming a torrent that is paused
 ```yaml
 {
@@ -379,7 +377,7 @@ Payload will be sent when rechecking/resuming a torrent that is paused
 }
 ```
 
-#### **Category Update Notifications**
+### **Category Update Notifications**
 Payload will be sent when updating torrents with missing category
 ```yaml
 {
@@ -392,7 +390,7 @@ Payload will be sent when updating torrents with missing category
 }
 ```
 
-#### **Tag Update Notifications**
+### **Tag Update Notifications**
 Payload will be sent when updating torrents with missing tag
 ```yaml
 {
@@ -408,7 +406,7 @@ Payload will be sent when updating torrents with missing tag
 }
 ```
 
-#### **Remove Unregistered Torrents Notifications**
+### **Remove Unregistered Torrents Notifications**
 Payload will be sent when Unregistered Torrents are found
 ```yaml
 {
@@ -432,7 +430,7 @@ Payload will be sent when Potential Unregistered Torrents are found
 }
 ```
 
-#### **Remove Orphaned Files Notifications**
+### **Remove Orphaned Files Notifications**
 Payload will be sent when Orphaned Files are found and moved into the orphaned folder
 ```yaml
 {
@@ -443,7 +441,7 @@ Payload will be sent when Orphaned Files are found and moved into the orphaned f
   "total_orphaned_files": int,         // Total number of orphaned files found
 }
 ```
-#### **Tag No Hardlinks Notifications**
+### **Tag No Hardlinks Notifications**
 Payload will be sent when no hard links are found for any files in a particular torrent
 ```yaml
 {
@@ -484,7 +482,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
 }
 ```
-#### **Empty Recycle Bin Notifications**
+### **Empty Recycle Bin Notifications**
 Payload will be sent when files are deleted from the Recycle Bin folder
 ```yaml
 {
