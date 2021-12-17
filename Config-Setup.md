@@ -9,7 +9,7 @@ A template Configuration File can be found in the repo [config/config.yml.sample
 **WARNING** <br>
 > As this software is constantly evolving and this wiki might not be up to date the sample shown here might not might not be current. Please referr to the repo for the most current version.
 
-## Config File
+# Config File
 
 **Sample**
 ```yaml
@@ -133,10 +133,29 @@ orphaned:
         - "**/Thumbs.db"
         - "**/@eaDir"
         - "/data/torrents/temp/**"
-```
-## **List of variables**<br>
 
-### **qbt:**
+#Notifiarr integration with webhooks
+notifiarr:
+  apikey: ####################################
+
+# Webhook notifications: Set value to notifiarr if using notifiarr integration, otherwise set to webhook URL
+webhooks:
+  error: https://mywebhookurl.com/qbt_manage
+  run_start: notifiarr
+  run_end:
+  function:
+    cross_seed:
+    recheck:
+    cat_update:
+    tag_update:
+    rem_unregistered:
+    rem_orphaned:
+    tag_nohardlinks:
+    empty_recyclebin:
+```
+# **List of variables**<br>
+
+## **qbt:**
 ---
 This section defines your qBittorrent instance.
 
@@ -148,7 +167,7 @@ This section defines your qBittorrent instance.
 
 <br>
 
-### **directory:**
+## **directory:**
 ---
 This section defines the directories that qbit_manage will be looking into for various parts of the script.
 
@@ -158,7 +177,7 @@ This section defines the directories that qbit_manage will be looking into for v
 | `root_dir` | Root downloads directory used to check for orphaned files, noHL, and remove unregistered. This directory is where you place all your downloads. This will need to be how qB views the directory where it places the downloads. This is required if you're using qbit_managee and/or qBittorrent within a container.| QBT_REM_ORPHANED / QBT_TAG_NOHARDLINKS / QBT_REM_UNREGISTERED
 | `remote_dir` | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally (not required if running qbit_manage in a container) and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host. |<center>❌</center>
 
-### **cat:**
+## **cat:**
 ---
 This section defines the categories that you are currently using and the path's that are associated with them.<br>
 > **NOTE** ALL categories must be defined, if it is in your qBit, then it **MUST** be defined here, if not the script will throw errors.
@@ -180,7 +199,7 @@ This can be used if in qBit your path is somemething like this. `/data/.torrents
 
 > **Note:** Using path is going to be best, just incase you have some paths that are very similar, examples would be TV and 4K TV or Movies and 4K moviees. 
 
-### **tags:**
+## **tags:**
 ---
 This section defines the tags that will be used, the way this script is set up is to use tags based upon the tracker's URL.<br>
 | Configuration | Definition | Required
@@ -199,7 +218,7 @@ If either max_ratio or max_seeding_time is set to `-2` then the the global share
 
 If you are unsure what key word to use. Simply select a torrent within qB and down at the bottom you should see a tab that says `Trackers` within the list that is populated there are ea list of trackers that are associateed with this torrent, select a key word from there and add it to the config file. Make sure this key word is unique enough that the script will not get connfused with any other tracker.
 
-### **nohardlinks:**
+## **nohardlinks:**
 ---
 Hardlinking data allows you to have your data in both the torrent directory and your media direectory at the same time without using double the amount of data. 
 
@@ -225,7 +244,7 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
 | `exclude_tags` | List of tags to exclude from the check. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None | <center>❌</center>
 
-### **recyclebin:**
+## **recyclebin:**
 ---
   Recycle Bin method of deletion will move files into the recycle bin (Located in /root_dir/.RecycleBin) instead of directly deleting them in qbit. 
 
@@ -233,12 +252,12 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 
 | Variable  | Definition | Default Values| Required
 | :------------ | :------------  | :------------ | :------------
-|`enable:`| `true` or `false` | `true` | <center>✅</center>
-| `empty_after_x_days:` | Will delete Recycle Bin contents if the files have been in the Recycle Bin for more than x days. (Uses date modified to track the time)| None | <center>❌</center>
+|`enable`| `true` or `false` | `true` | <center>✅</center>
+| `empty_after_x_days` | Will delete Recycle Bin contents if the files have been in the Recycle Bin for more than x days. (Uses date modified to track the time)| None | <center>❌</center>
 
 > Note: The more time you place for the `empty_after_x_days:` variable the better, allowing you more time to catch any mistakes by the script. If the variable is set to `0` it will delete contents immediately after every script run. If the variable is not set it will never delete the contents of the Recycle Bin.
 
-### **orphaned:**
+## **orphaned:**
 ---
 This section allows for the exclusion of certain files from being considered "Orphaned"
 
@@ -246,4 +265,233 @@ This is handy when you have automatically generated files that certain OSs decid
 
 | Variable  | Definition | Default Values| Required
 | :------------ | :------------  | :------------ | :------------
-|`exclude_patterns:`| List of [patterns](https://commandbox.ortusbooks.com/usage/parameters/globbing-patterns) to exclude certain files from orphaned | None | <center>❌</center>
+|`exclude_patterns`| List of [patterns](https://commandbox.ortusbooks.com/usage/parameters/globbing-patterns) to exclude certain files from orphaned | None | <center>❌</center>
+
+
+
+<br><br><br><br><br>
+##*---FEATURE CURRENTLY IN DEVELOP BRANCH---*
+
+## **notifiarr:**
+---
+[Notifiarr](https://notifiarr.com/) integration is used in conjunction with webhooks to allow discord notifications via Notifiarr.
+
+| Variable  | Definition | Default Values| Required
+| :------------ | :------------  | :------------ | :------------
+|`apikey`| Notifiarr API Key | N/A | <center>✅</center>
+
+## **webhooks:**
+---
+Provide webhook notifications based on event triggers
+
+| Variable  | Notification Sent | Default Values| Required
+| :------------ | :------------  | :------------ | :------------
+|[error](#error-notifications)| When errors occur during the run | N/A | <center>❌</center>
+|[run_start](#run-start-notifications)| At the beginning of every run  | N/A | <center>❌</center>
+|[run_end](#run-end-notifications)| At the end of every run | N/A | <center>❌</center>
+|[cross_seed](#cross-seed-notifications)| During the cross-seed function | N/A | <center>❌</center>
+|[recheck](#recheck-notifications)| During the recheck function| N/A | <center>❌</center>
+|[cat_update](#category-update-notifications)| During the category update function | N/A | <center>❌</center>
+|[tag_update](#tag-update-notifications)| During the tag update function | N/A | <center>❌</center>
+|[rem_unregistered](#remove-unregistered-torrents-notifications)| During the removing unregistered torrents function | N/A | <center>❌</center>
+|[rem_orphaned](#remove-orphaned-files-notifications)| During the removing orphaned function| N/A | <center>❌</center>
+|[tag_nohardlinks](#tag-no-hardlinks-notifications)| During the tag no hardlinks function | N/A | <center>❌</center>
+|[empty_recyclebin](#empty-recycle-bin-notifications)| When files are deleted from the Recycle Bin | N/A | <center>❌</center>
+
+
+
+### JSON Payloads
+#### **Error Notifications**
+Payload will be sent on any errors
+```yaml
+{
+  "function": "Run_Error",     // Webhook Trigger keyword
+  "title": str,                // Title of the Payload
+  "error": str,                // Error Message
+  "critical": bool             // Critical Error
+}
+```
+#### **Run Start Notifications**
+Payload will be sent at the start of the run
+```yaml
+{
+  "function": "Run_Start",     // Webhook Trigger keyword
+  "title": str,                // Title of the Payload
+  "start_time": str,           // Time Run is started Format "YYYY-mm-dd HH:MM:SS"
+  "dry_run": bool              // Dry-Run
+}
+```
+#### **Run End Notifications**
+Payload will be sent at the end of the run
+```yaml
+{
+  "function": "Run_End",                    // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "start_time": str,                        // Time Run started Format "YYYY-mm-dd HH:MM:SS"
+  "end_time": str,                          // Time Run ended Format "YYYY-mm-dd HH:MM:SS"
+  "run_time": str,                          // Total Run Time "H:MM:SS"
+  "torrents_added": int,                    // Total Torrents Added
+  "torrents_deleted": int,                  // Total Torrents Deleted
+  "torrents_deleted_and_contents": int,     // Total Torrents + Contents Deleted
+  "torrents_resumed": int,                  // Total Torrents Resumed
+  "torrents_rechecked": int,                // Total Torrents Rechecked
+  "torrents_categorized": int,              // Total Torrents Categorized
+  "torrents_tagged": int,                   // Total Torrents Tagged
+  "remove_unregistered": int,               // Total Unregistered Torrents Removed
+  "orphaned_files_found": int,              // Total Orphaned Files Found
+  "torrents_tagged_no_hardlinks": int,      // Total noHL Torrents Tagged
+  "torrents_untagged_no_hardlinks": int,    // Total noHL Torrents untagged
+  "files_deleted_from_recyclebin": int      // Total Files Deleted from Recycle Bin
+}
+```
+
+#### **Cross-Seed Notifications**
+Payload will be sent when adding a cross-seed torrent to qBittorrent if the original torrent is complete
+```yaml
+{
+  "function": "cross_seed",             // Webhook Trigger keyword
+  "title": str,                         // Title of the Payload
+  "torrent_name": str,                  // Torrent Name
+  "torrent_category": str,              // Torrent Category
+  "torrent_save_path": str,             // Torrent Download directory
+  "torrent_add_tag": "cross-seed",      // Total Torrents Added
+}
+```
+Payload will be sent when there are existing torrents found that are missing the cross-seed tag
+```yaml
+{
+  "function": "tag_cross_seed",         // Webhook Trigger keyword
+  "title": str,                         // Title of the Payload
+  "torrent_name": str,                  // Torrent Name
+  "torrent_add_tag": "cross-seed",      // Total Torrents Added
+}
+```
+
+#### **Recheck Notifications**
+Payload will be sent when rechecking/resuming a torrent that is paused
+```yaml
+{
+  "function": "recheck",             // Webhook Trigger keyword
+  "title": str,                      // Title of the Payload
+  "torrent_name": str,               // Torrent Name
+  "torrent_tracker": str,            // Torrent Tracker URL
+  "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
+}
+```
+
+#### **Category Update Notifications**
+Payload will be sent when updating torrents with missing category
+```yaml
+{
+  "function": "cat_update",          // Webhook Trigger keyword
+  "title": str,                      // Title of the Payload
+  "torrent_name": str,               // Torrent Name
+  "torrent_new_cat": str,            // New Torrent Category
+  "torrent_tracker": str,            // Torrent Tracker URL
+  "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
+}
+```
+
+#### **Tag Update Notifications**
+Payload will be sent when updating torrents with missing tag
+```yaml
+{
+  "function": "tag_update",                 // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "torrent_name": str,                      // Torrent Name
+  "torrent_new_tag": str,                   // New Torrent Tag
+  "torrent_tracker": str,                   // Torrent Tracker URL
+  "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
+  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
+  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
+  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
+}
+```
+
+#### **Remove Unregistered Torrents Notifications**
+Payload will be sent when Unregistered Torrents are found
+```yaml
+{
+  "function": "rem_unregistered",          // Webhook Trigger keyword
+  "title": str,                            // Title of the Payload
+  "torrent_name": str,                     // Torrent Name
+  "torrent_status": str,                   // Torrent Tracker Status message
+  "torrent_tracker": str,                  // Torrent Tracker URL
+  "notifiarr_indexer": str,                // Notifiarr React name/id for indexer
+}
+```
+Payload will be sent when Potential Unregistered Torrents are found
+```yaml
+{
+  "function": "potential_rem_unregistered",          // Webhook Trigger keyword
+  "title": str,                                      // Title of the Payload
+  "torrent_name": str,                               // Torrent Name
+  "torrent_status": str,                             // Torrent Tracker Status message
+  "torrent_tracker": str,                            // Torrent Tracker URL
+  "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
+}
+```
+
+#### **Remove Orphaned Files Notifications**
+Payload will be sent when Orphaned Files are found and moved into the orphaned folder
+```yaml
+{
+  "function": "rem_orphaned",          // Webhook Trigger keyword
+  "title": str,                        // Title of the Payload
+  "orphaned_files": list,              // List of orphaned files
+  "orphaned_directory": str,           // Folder path where orphaned files will be moved to
+  "total_orphaned_files": int,         // Total number of orphaned files found
+}
+```
+#### **Tag No Hardlinks Notifications**
+Payload will be sent when no hard links are found for any files in a particular torrent
+```yaml
+{
+  "function": "tag_nohardlinks",            // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "torrent_name": str,                      // Torrent Name
+  "torrent_add_tag": 'noHL',                // Add `noHL` to Torrent Tags
+  "torrent_tracker": str,                   // Torrent Tracker URL
+  "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
+  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
+  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
+  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
+}
+```
+Payload will be sent when hard links are found for any torrents that were previously tagged with `noHL`
+```yaml
+{
+  "function": "untag_nohardlinks",          // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "torrent_name": str,                      // Torrent Name
+  "torrent_remove_tag": 'noHL',             // Remove `noHL` from Torrent Tags
+  "torrent_tracker": str,                   // Torrent Tracker URL
+  "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
+  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
+  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
+  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
+}
+```
+
+Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets share limit criteria.
+```yaml
+{
+  "function": "cleanup_tag_nohardlinks",    // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "torrent_name": str,                      // Torrent Name
+  "cleanup": True,                          // Cleanup flag
+  "torrent_tracker": str,                   // Torrent Tracker URL
+  "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
+}
+```
+#### **Empty Recycle Bin Notifications**
+Payload will be sent when files are deleted from the Recycle Bin folder
+```yaml
+{
+  "function": "empty_recyclebin",         // Webhook Trigger keyword
+  "title": str,                           // Title of the Payload
+  "files": list,                          // List of files that were deleted from the Recycle Bin
+  "empty_after_x_days": str,              // Number of days that the files will be kept in the Recycle Bin
+  "size_in_bytes": int,                   // Total number of bytes deleted from the Recycle Bin
+}
+```
