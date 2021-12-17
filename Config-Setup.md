@@ -158,10 +158,9 @@ This section defines the directories that qbit_manage will be looking into for v
 | `root_dir` | Root downloads directory used to check for orphaned files, noHL, and remove unregistered. This directory is where you place all your downloads. This will need to be how qB views the directory where it places the downloads. This is required if you're using qbit_managee and/or qBittorrent within a container.| QBT_REM_ORPHANED / QBT_TAG_NOHARDLINKS / QBT_REM_UNREGISTERED
 | `remote_dir` | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally (not required if running qbit_manage in a container) and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host. |<center>❌</center>
 
-## **cat:**
+### **cat:**
 ---
-This section defines the categories that you are currently using and the path's that are associated with them <br>
-<br>
+This section defines the categories that you are currently using and the path's that are associated with them.<br>
 > **NOTE** ALL categories must be defined, if it is in your qBit, then it **MUST** be defined here, if not the script will throw errors.
 
 | Configuration | Definition | Required
@@ -226,7 +225,7 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
 | `exclude_tags` | List of tags to exclude from the check. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None | <center>❌</center>
 
-  ### **recyclebin:**
+### **recyclebin:**
 ---
   Recycle Bin method of deletion will move files into the recycle bin (Located in /root_dir/.RecycleBin) instead of directly deleting them in qbit. 
 
