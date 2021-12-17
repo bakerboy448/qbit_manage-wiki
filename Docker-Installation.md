@@ -4,8 +4,6 @@ A simple Dockerfile is available in this repo if you'd like to build it yourself
 
 `docker run -it -v <PATH_TO_CONFIG>:/config:rw bobokun/qbit_manage`
 
-* The -it allows you to interact with the script when needed.
-
 * The -v <PATH_TO_CONFIG>:/config:rw mounts the location you choose as a persistent volume to store your files.
   * Change <PATH_TO_CONFIG> to a folder where your config.yml and other files are.
   * The docker image defaults to running the config named config.yml in your persistent volume.
