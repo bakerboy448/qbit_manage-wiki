@@ -134,15 +134,29 @@ orphaned:
         - "**/@eaDir"
         - "/data/torrents/temp/**"
 
+#Apprise integration with webhooks
+apprise:
+  #Mandatory to fill out the url of your apprise API endpoint
+  api_url: http://apprise-api:8000
+  #Mandatory to fill out the notification url/urls based on the notification services provided by apprise. https://github.com/caronc/apprise/wiki
+  notify_url:
+
 #Notifiarr integration with webhooks
 notifiarr:
+  #Mandatory to fill out API Key
   apikey: ####################################
+  #<OPTIONAL> Set to a unique value (could be your username on notifiarr for example)
+  instance:
 
-# Webhook notifications: Set value to notifiarr if using notifiarr integration, otherwise set to webhook URL
+# Webhook notifications: 
+# Possible values: 
+# Set value to notifiarr if using notifiarr integration
+# Set value to apprise if using apprise integration
+# Set value to a valid webhook URL
 webhooks:
   error: https://mywebhookurl.com/qbt_manage
   run_start: notifiarr
-  run_end:
+  run_end: apprise
   function:
     cross_seed:
     recheck:
@@ -271,6 +285,14 @@ This is handy when you have automatically generated files that certain OSs decid
 
 <br><br><br><br><br>
 # *---FEATURE CURRENTLY IN DEVELOP BRANCH---*
+## **apprise:**
+---
+[Apprise](https://github.com/caronc/apprise) integration is used in conjunction with webhooks to allow notifications via apprise-api.
+
+| Variable  | Definition | Default Values| Required
+| :------------ | :------------  | :------------ | :------------
+|`api_url`| Apprise API Endpoint URL | N/A | <center>✅</center>
+|`notify_url`| [Notification Services URL](https://github.com/caronc/apprise/wiki)  | N/A | <center>✅</center>
 
 ## **notifiarr:**
 ---
@@ -303,18 +325,20 @@ Provide webhook notifications based on event triggers
 Payload will be sent on any errors
 ```yaml
 {
-  "function": "Run_Error",     // Webhook Trigger keyword
+  "function": "run_error",     // Webhook Trigger keyword
   "title": str,                // Title of the Payload
-  "error": str,                // Error Message
-  "critical": bool             // Critical Error
+  "body": str,                 // Error Message of the Payload
+  "critical": bool,            // Critical Error
+  "type": str                  // severity of error
 }
 ```
 ### **Run Start Notifications**
 Payload will be sent at the start of the run
 ```yaml
 {
-  "function": "Run_Start",     // Webhook Trigger keyword
+  "function": "run_start",     // Webhook Trigger keyword
   "title": str,                // Title of the Payload
+  "body": str,                 // Message of the Payload
   "start_time": str,           // Time Run is started Format "YYYY-mm-dd HH:MM:SS"
   "dry_run": bool              // Dry-Run
 }
@@ -323,8 +347,9 @@ Payload will be sent at the start of the run
 Payload will be sent at the end of the run
 ```yaml
 {
-  "function": "Run_End",                    // Webhook Trigger keyword
+  "function": "run_end",                    // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
   "start_time": str,                        // Time Run started Format "YYYY-mm-dd HH:MM:SS"
   "end_time": str,                          // Time Run ended Format "YYYY-mm-dd HH:MM:SS"
   "run_time": str,                          // Total Run Time "H:MM:SS"
@@ -349,6 +374,7 @@ Payload will be sent when adding a cross-seed torrent to qBittorrent if the orig
 {
   "function": "cross_seed",             // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
+  "body": str,                          // Message of the Payload
   "torrent_name": str,                  // Torrent Name
   "torrent_category": str,              // Torrent Category
   "torrent_save_path": str,             // Torrent Download directory
@@ -360,6 +386,7 @@ Payload will be sent when there are existing torrents found that are missing the
 {
   "function": "tag_cross_seed",         // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
+  "body": str,                          // Message of the Payload
   "torrent_name": str,                  // Torrent Name
   "torrent_add_tag": "cross-seed",      // Total Torrents Added
 }
@@ -371,6 +398,7 @@ Payload will be sent when rechecking/resuming a torrent that is paused
 {
   "function": "recheck",             // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
+  "body": str,                       // Message of the Payload
   "torrent_name": str,               // Torrent Name
   "torrent_tracker": str,            // Torrent Tracker URL
   "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
@@ -383,6 +411,7 @@ Payload will be sent when updating torrents with missing category
 {
   "function": "cat_update",          // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
+  "body": str,                       // Message of the Payload
   "torrent_name": str,               // Torrent Name
   "torrent_new_cat": str,            // New Torrent Category
   "torrent_tracker": str,            // Torrent Tracker URL
@@ -396,6 +425,7 @@ Payload will be sent when updating torrents with missing tag
 {
   "function": "tag_update",                 // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_new_tag": str,                   // New Torrent Tag
   "torrent_tracker": str,                   // Torrent Tracker URL
@@ -412,6 +442,7 @@ Payload will be sent when Unregistered Torrents are found
 {
   "function": "rem_unregistered",          // Webhook Trigger keyword
   "title": str,                            // Title of the Payload
+  "body": str,                             // Message of the Payload
   "torrent_name": str,                     // Torrent Name
   "torrent_status": str,                   // Torrent Tracker Status message
   "torrent_tracker": str,                  // Torrent Tracker URL
@@ -423,6 +454,7 @@ Payload will be sent when Potential Unregistered Torrents are found
 {
   "function": "potential_rem_unregistered",          // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
+  "body": str,                                       // Message of the Payload
   "torrent_name": str,                               // Torrent Name
   "torrent_status": str,                             // Torrent Tracker Status message
   "torrent_tracker": str,                            // Torrent Tracker URL
@@ -436,6 +468,7 @@ Payload will be sent when Orphaned Files are found and moved into the orphaned f
 {
   "function": "rem_orphaned",          // Webhook Trigger keyword
   "title": str,                        // Title of the Payload
+  "body": str,                         // Message of the Payload
   "orphaned_files": list,              // List of orphaned files
   "orphaned_directory": str,           // Folder path where orphaned files will be moved to
   "total_orphaned_files": int,         // Total number of orphaned files found
@@ -447,6 +480,7 @@ Payload will be sent when no hard links are found for any files in a particular 
 {
   "function": "tag_nohardlinks",            // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_add_tag": 'noHL',                // Add `noHL` to Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
@@ -461,6 +495,7 @@ Payload will be sent when hard links are found for any torrents that were previo
 {
   "function": "untag_nohardlinks",          // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_remove_tag": 'noHL',             // Remove `noHL` from Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
@@ -476,6 +511,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
 {
   "function": "cleanup_tag_nohardlinks",    // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "cleanup": True,                          // Cleanup flag
   "torrent_tracker": str,                   // Torrent Tracker URL
@@ -488,6 +524,7 @@ Payload will be sent when files are deleted from the Recycle Bin folder
 {
   "function": "empty_recyclebin",         // Webhook Trigger keyword
   "title": str,                           // Title of the Payload
+  "body": str,                            // Message of the Payload
   "files": list,                          // List of files that were deleted from the Recycle Bin
   "empty_after_x_days": str,              // Number of days that the files will be kept in the Recycle Bin
   "size_in_bytes": int,                   // Total number of bytes deleted from the Recycle Bin

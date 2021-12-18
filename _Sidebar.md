@@ -14,6 +14,7 @@
           - [nohardlinks](Config-Setup#nohardlinks)
           - [recyclebin](Config-Setup#recyclebin)
           - [orphaned](Config-Setup#orphaned)
+          - [apprise](Config-Setup#apprise)
           - [notifiarr](Config-Setup#notifiarr)
           - [webhooks](Config-Setup#webhooks)
     - [Commands](Commands)
