@@ -46,17 +46,23 @@ tags:
   #   max_seeding_time: 129600
   # <OPTIONAL> Will limit the upload speed KiB/s (KiloBytes/second) (-1 sets the limit to infinity)
   #   limit_upload_speed: 150
+  # <OPTIONAL> Set this to the notifiarr react name. This is used to add indexer reactions to the notifications sent by Notifiarr
+  #   notifiarr: <notifiarr indexer>
   animebytes.tv:
     tag: AnimeBytes
+    notifiarr: animebytes
   avistaz:
     tag: Avistaz
     max_ratio: 5.0
     max_seeding_time: 129600
     limit_upload_speed: 150
+    notifiarr: avistaz
   beyond-hd:
     tag: Beyond-HD
+    notifiarr: beyondhd
   blutopia:
     tag: Blutopia
+    notifiarr: blutopia
   cartoonchaos:
     tag: CartoonChaos
   digitalcore:
@@ -70,12 +76,15 @@ tags:
     max_seeding_time: 129600
   landof.tv:
     tag: BroadcasTheNet
+    notifiarr: broadcasthenet
   myanonamouse:
     tag: MaM
   passthepopcorn:
     tag: PassThePopcorn
+    notifiarr: passthepopcorn
   privatehd:
     tag: PrivateHD
+    notifiarr:
   tleechreload:
     tag: TorrentLeech
   torrentdb:
@@ -158,14 +167,14 @@ webhooks:
   run_start: notifiarr
   run_end: apprise
   function:
-    cross_seed:
-    recheck:
-    cat_update:
-    tag_update:
-    rem_unregistered:
-    rem_orphaned:
-    tag_nohardlinks:
-    empty_recyclebin:
+    cross_seed: https://mywebhookurl.com/qbt_manage
+    recheck: notifiarr
+    cat_update: apprise
+    tag_update: notifiarr
+    rem_unregistered: notifiarr
+    rem_orphaned: notifiarr
+    tag_nohardlinks: notifiarr
+    empty_recyclebin: notifiarr
 ```
 # **List of variables**<br>
 
@@ -388,7 +397,8 @@ Payload will be sent when there are existing torrents found that are missing the
   "title": str,                         // Title of the Payload
   "body": str,                          // Message of the Payload
   "torrent_name": str,                  // Torrent Name
-  "torrent_add_tag": "cross-seed",      // Total Torrents Added
+  "torrent_category": str,              // Torrent Category
+  "torrent_add_tag": "cross-seed",      // Tag Added
 }
 ```
 
@@ -400,6 +410,7 @@ Payload will be sent when rechecking/resuming a torrent that is paused
   "title": str,                      // Title of the Payload
   "body": str,                       // Message of the Payload
   "torrent_name": str,               // Torrent Name
+  "torrent_category": str,           // Torrent Category
   "torrent_tracker": str,            // Torrent Tracker URL
   "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
 }
@@ -427,6 +438,7 @@ Payload will be sent when updating torrents with missing tag
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
+  "torrent_category": str,                  // Torrent Category
   "torrent_new_tag": str,                   // New Torrent Tag
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
@@ -444,6 +456,7 @@ Payload will be sent when Unregistered Torrents are found
   "title": str,                            // Title of the Payload
   "body": str,                             // Message of the Payload
   "torrent_name": str,                     // Torrent Name
+  "torrent_category": str,                 // Torrent Category
   "torrent_status": str,                   // Torrent Tracker Status message
   "torrent_tracker": str,                  // Torrent Tracker URL
   "notifiarr_indexer": str,                // Notifiarr React name/id for indexer
@@ -456,6 +469,8 @@ Payload will be sent when Potential Unregistered Torrents are found
   "title": str,                                      // Title of the Payload
   "body": str,                                       // Message of the Payload
   "torrent_name": str,                               // Torrent Name
+  "torrent_category": str,                           // Torrent Category
+  "torrent_add_tag": "issue",                        // Tag Added
   "torrent_status": str,                             // Torrent Tracker Status message
   "torrent_tracker": str,                            // Torrent Tracker URL
   "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
@@ -482,6 +497,7 @@ Payload will be sent when no hard links are found for any files in a particular 
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
+  "torrent_category": str,                  // Torrent Category
   "torrent_add_tag": 'noHL',                // Add `noHL` to Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
@@ -497,6 +513,7 @@ Payload will be sent when hard links are found for any torrents that were previo
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
+  "torrent_category": str,                  // Torrent Category
   "torrent_remove_tag": 'noHL',             // Remove `noHL` from Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
@@ -513,6 +530,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
+  "torrent_category": str,                  // Torrent Category
   "cleanup": True,                          // Cleanup flag
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
