@@ -1,7 +1,7 @@
 | Shell Command |Docker Environment Variable |Description | Default Value |
 | :------------ | :------------  | :------------ | :------------ |
 | `-r` or`--run` | QBT_RUN |Run without the scheduler. Script will exit after completion. | False |
-| `-sch` or `--schedule` | QBT_SCHEDULE  | Schedule to run every x minutes. (Default set to 30)  | 30 |
+| `-sch` or `--schedule` | QBT_SCHEDULE  | Schedule to run every x minutes. (Default set to 1440 (1 day))  | 1440 |
 | `-c CONFIG` or `--config-file CONFIG` | QBT_CONFIG  | This is used if you want to use a different name for your config.yml. `Example: tv.yml`  | config.yml |
 | `-lf LOGFILE,` or `--log-file LOGFILE,` | QBT_LOGFILE | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
 | `-cs` or `--cross-seed` | QBT_CROSS_SEED | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  | False |
