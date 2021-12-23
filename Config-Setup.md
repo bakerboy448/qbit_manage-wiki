@@ -316,6 +316,7 @@ This is handy when you have automatically generated files that certain OSs decid
 | Variable  | Definition | Default Values| Required
 | :------------ | :------------  | :------------ | :------------
 |`apikey`| Notifiarr API Key | N/A | <center>✅</center>
+|`instance`| Optional unique value used to identify your instance. (could be your username on notifiarr for example)| N/A | <center>❌</center>
 
 ## **webhooks:**
 ---
