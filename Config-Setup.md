@@ -300,10 +300,6 @@ This is handy when you have automatically generated files that certain OSs decid
 | :------------ | :------------  | :------------ | :------------
 |`exclude_patterns`| List of [patterns](https://commandbox.ortusbooks.com/usage/parameters/globbing-patterns) to exclude certain files from orphaned | None | <center>❌</center>
 
-
-
-<br><br><br><br><br>
-# *---FEATURE CURRENTLY IN DEVELOP BRANCH---*
 ## **apprise:**
 ---
 [Apprise](https://github.com/caronc/apprise) integration is used in conjunction with webhooks to allow notifications via apprise-api.
