@@ -377,6 +377,7 @@ Payload will be sent at the end of the run
   "torrents_categorized": int,              // Total Torrents Categorized
   "torrents_tagged": int,                   // Total Torrents Tagged
   "remove_unregistered": int,               // Total Unregistered Torrents Removed
+  "potential_unregistered ": int,           // Total Potential Unregistered Torrents Found
   "orphaned_files_found": int,              // Total Orphaned Files Found
   "torrents_tagged_no_hardlinks": int,      // Total noHL Torrents Tagged
   "torrents_untagged_no_hardlinks": int,    // Total noHL Torrents untagged
