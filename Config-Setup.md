@@ -22,6 +22,9 @@ qbt:
   user: "username"
   pass: "password"
 
+settings:
+  force_auto_tmm: False # Will force qBittorrent to enable Automatic Torrent Management for each torrent.
+
 directory:
   # Do not remove these
   # Cross-seed var: </your/path/here/> # Output directory of cross-seed
@@ -34,12 +37,12 @@ directory:
 
 # Category & Path Parameters
 cat:
-  # <Category Name> : <save_path> # Path of your save directory. Can be a keyword or full path
+  # <Category Name> : <save_path> # Path of your save directory.
   movies: "/data/torrents/Movies"
-  tv: "TV"
+  tv: "/data/torrents/TV"
 
 # Tag Parameters
-tags:
+tracker:
   # <Tracker URL Keyword>:    # <MANDATORY> This is the keyword in the tracker url
   # <MANDATORY> Set tag name
   #   tag: <Tag Name>
@@ -185,6 +188,10 @@ webhooks:
     rem_orphaned: notifiarr
     tag_nohardlinks: notifiarr
     empty_recyclebin: notifiarr
+
+# BHD Integration used for checking unregistered torrents
+bhd:
+  apikey:
 ```
 # **List of variables**<br>
 
@@ -232,9 +239,9 @@ This can be used if in qBit your path is somemething like this. `/data/.torrents
 
 > **Note:** Using path is going to be best, just incase you have some paths that are very similar, examples would be TV and 4K TV or Movies and 4K moviees. 
 
-## **tags:**
+## **tracker:**
 ---
-This section defines the tags that will be used, the way this script is set up is to use tags based upon the tracker's URL.<br>
+This section defines the tags used based upon the tracker's URL.<br>
 | Configuration | Definition | Required
 | :------------ | :------------  | :------------
 | `key`| Tracker URL Keyword |<center>✅</center>
@@ -245,7 +252,7 @@ This section defines the tags that will be used, the way this script is set up i
 | `max_ratio` | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit) | None | <center>❌</center>
 | `max_seeding_time` | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)| None |  <center>❌</center>
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
-
+| `notifiarr` | Set this to the notifiarr react name. This is used to add indexer reactions to the notifications sent by Notifiarr| None | <center>❌</center>
 
 If either max_ratio or max_seeding_time is set to `-2` then the the global share limits will be used, `-1` then no share limits will be used.
 
@@ -556,3 +563,11 @@ Payload will be sent when files are deleted from the Recycle Bin folder
   "size_in_bytes": int,                   // Total number of bytes deleted from the Recycle Bin
 }
 ```
+
+## **bhd:**
+---
+BHD integration is used if you are on the private tracker BHD. (Used to identify any unregistered torrents from this tracker)
+
+| Variable  | Definition | Default Values| Required
+| :------------ | :------------  | :------------ | :------------
+|`apikey`| BHD API Key | N/A | <center>✅</center>

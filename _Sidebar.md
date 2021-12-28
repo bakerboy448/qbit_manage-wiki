@@ -17,4 +17,5 @@
           - [apprise](Config-Setup#apprise)
           - [notifiarr](Config-Setup#notifiarr)
           - [webhooks](Config-Setup#webhooks)
+          - [bhd](Config-Setup#bhd)
     - [Commands](Commands)
