@@ -10,7 +10,7 @@
           - [qbt](Config-Setup#qbt)
           - [directory](Config-Setup#directory)
           - [cat](Config-Setup#cat)
-          - [tags](Config-Setup#tags)
+          - [tracker](Config-Setup#tracker)
           - [nohardlinks](Config-Setup#nohardlinks)
           - [recyclebin](Config-Setup#recyclebin)
           - [orphaned](Config-Setup#orphaned)
