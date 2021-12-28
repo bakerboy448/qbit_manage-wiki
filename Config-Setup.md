@@ -402,7 +402,7 @@ Payload will be sent when adding a cross-seed torrent to qBittorrent if the orig
   "torrent_name": str,                  // Torrent Name
   "torrent_category": str,              // Torrent Category
   "torrent_save_path": str,             // Torrent Download directory
-  "torrent_add_tag": "cross-seed",      // Total Torrents Added
+  "torrent_tag": "cross-seed",          // Total Torrents Added
 }
 ```
 Payload will be sent when there are existing torrents found that are missing the cross-seed tag
@@ -413,7 +413,7 @@ Payload will be sent when there are existing torrents found that are missing the
   "body": str,                          // Message of the Payload
   "torrent_name": str,                  // Torrent Name
   "torrent_category": str,              // Torrent Category
-  "torrent_add_tag": "cross-seed",      // Tag Added
+  "torrent_tag": "cross-seed",          // Tag Added
 }
 ```
 
@@ -439,7 +439,7 @@ Payload will be sent when updating torrents with missing category
   "title": str,                      // Title of the Payload
   "body": str,                       // Message of the Payload
   "torrent_name": str,               // Torrent Name
-  "torrent_new_cat": str,            // New Torrent Category
+  "torrent_category": str,           // New Torrent Category
   "torrent_tracker": str,            // Torrent Tracker URL
   "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
 }
@@ -454,7 +454,7 @@ Payload will be sent when updating torrents with missing tag
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_category": str,                  // Torrent Category
-  "torrent_new_tag": str,                   // New Torrent Tag
+  "torrent_tag": str,                       // New Torrent Tag
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
   "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
@@ -485,7 +485,7 @@ Payload will be sent when Potential Unregistered Torrents are found
   "body": str,                                       // Message of the Payload
   "torrent_name": str,                               // Torrent Name
   "torrent_category": str,                           // Torrent Category
-  "torrent_add_tag": "issue",                        // Tag Added
+  "torrent_tag": "issue",                            // Tag Added
   "torrent_status": str,                             // Torrent Tracker Status message
   "torrent_tracker": str,                            // Torrent Tracker URL
   "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
@@ -513,7 +513,7 @@ Payload will be sent when no hard links are found for any files in a particular 
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_category": str,                  // Torrent Category
-  "torrent_add_tag": 'noHL',                // Add `noHL` to Torrent Tags
+  "torrent_tag": 'noHL',                    // Add `noHL` to Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
   "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
@@ -529,7 +529,7 @@ Payload will be sent when hard links are found for any torrents that were previo
   "body": str,                              // Message of the Payload
   "torrent_name": str,                      // Torrent Name
   "torrent_category": str,                  // Torrent Category
-  "torrent_remove_tag": 'noHL',             // Remove `noHL` from Torrent Tags
+  "torrent_tag": 'noHL',                    // Remove `noHL` from Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
   "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
