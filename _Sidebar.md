@@ -1,6 +1,6 @@
 - [Home](Home)
     - [Installation](Installation)
-    - [unRAID Installation](Unraid-Installation)
+        - [unRAID Installation](Unraid-Installation)
         - [Local Installation](Local-Installations)
         - [NIX Installation](Nix-Installation)
         - [Docker Installation](Docker-Installation)
