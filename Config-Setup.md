@@ -223,6 +223,16 @@ This section defines your qBittorrent instance.
 
 <br>
 
+## **settings:**
+---
+This section defines any settings defined in the configuration.
+
+| Variable | Definition | Required
+| :------------ | :------------  | :------------
+| `force_auto_tmm`| Will force qBittorrent to enable Automatic Torrent Management for each torrent.|<center>❌</center>
+| `tracker_error_tag` | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`| <center>❌</center>
+
+<br>
 ## **directory:**
 ---
 This section defines the directories that qbit_manage will be looking into for various parts of the script.
@@ -357,6 +367,7 @@ Provide webhook notifications based on event triggers
 |[cat_update](#category-update-notifications)| During the category update function | N/A | <center>❌</center>
 |[tag_update](#tag-update-notifications)| During the tag update function | N/A | <center>❌</center>
 |[rem_unregistered](#remove-unregistered-torrents-notifications)| During the removing unregistered torrents function | N/A | <center>❌</center>
+|[tag_tracker_error](#tag-tracker-error-notifications)| During the removing unregistered torrents/tag tracker error function | N/A | <center>❌</center>
 |[rem_orphaned](#remove-orphaned-files-notifications)| During the removing orphaned function| N/A | <center>❌</center>
 |[tag_nohardlinks](#tag-no-hardlinks-notifications)| During the tag no hardlinks function | N/A | <center>❌</center>
 |[empty_recyclebin](#empty-recycle-bin-notifications)| When files are deleted from the Recycle Bin | N/A | <center>❌</center>
@@ -403,7 +414,8 @@ Payload will be sent at the end of the run
   "torrents_categorized": int,              // Total Torrents Categorized
   "torrents_tagged": int,                   // Total Torrents Tagged
   "remove_unregistered": int,               // Total Unregistered Torrents Removed
-  "potential_unregistered ": int,           // Total Potential Unregistered Torrents Found
+  "torrents_tagged_tracker_error": int,     // Total Tracker Error Torrents Tagged
+  "torrents_untagged_tracker_error": int,   // Total Tracker Error Torrents untagged
   "orphaned_files_found": int,              // Total Orphaned Files Found
   "torrents_tagged_no_hardlinks": int,      // Total noHL Torrents Tagged
   "torrents_untagged_no_hardlinks": int,    // Total noHL Torrents untagged
@@ -496,16 +508,29 @@ Payload will be sent when Unregistered Torrents are found
   "notifiarr_indexer": str,                // Notifiarr React name/id for indexer
 }
 ```
-Payload will be sent when Potential Unregistered Torrents are found
+### **Tag Tracker Error Notifications**
+Payload will be sent when trackers with errors are tagged/untagged
 ```yaml
 {
-  "function": "potential_rem_unregistered",          // Webhook Trigger keyword
+  "function": "tag_tracker_error",                   // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
   "body": str,                                       // Message of the Payload
   "torrent_name": str,                               // Torrent Name
   "torrent_category": str,                           // Torrent Category
   "torrent_tag": "issue",                            // Tag Added
   "torrent_status": str,                             // Torrent Tracker Status message
+  "torrent_tracker": str,                            // Torrent Tracker URL
+  "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
+}
+```
+```yaml
+{
+  "function": "untag_tracker_error",                   // Webhook Trigger keyword
+  "title": str,                                      // Title of the Payload
+  "body": str,                                       // Message of the Payload
+  "torrent_name": str,                               // Torrent Name
+  "torrent_category": str,                           // Torrent Category
+  "torrent_tag": "issue",                            // Tag Added
   "torrent_tracker": str,                            // Torrent Tracker URL
   "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
 }
