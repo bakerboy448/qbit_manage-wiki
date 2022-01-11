@@ -260,13 +260,6 @@ The syntax for all the categories are as follows
 ```yaml
 category: <path>/<to>/category
 ```
-Alternatively you can use key words to define the path.
-```yaml
-category: TV
-```
-This can be used if in qBit your path is somemething like this. `/data/.torrents/TV/`
-
-> **Note:** Using path is going to be best, just incase you have some paths that are very similar, examples would be TV and 4K TV or Movies and 4K moviees. 
 
 ## **tracker:**
 ---
