@@ -520,12 +520,12 @@ Payload will be sent when trackers with errors are tagged/untagged
 ```
 ```yaml
 {
-  "function": "untag_tracker_error",                   // Webhook Trigger keyword
+  "function": "untag_tracker_error",                 // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
   "body": str,                                       // Message of the Payload
   "torrent_name": str,                               // Torrent Name
   "torrent_category": str,                           // Torrent Category
-  "torrent_tag": "issue",                            // Tag Added
+  "torrent_tag": str,                                // Tag Added
   "torrent_tracker": str,                            // Torrent Tracker URL
   "notifiarr_indexer": str,                          // Notifiarr React name/id for indexer
 }
