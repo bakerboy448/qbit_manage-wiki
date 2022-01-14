@@ -27,7 +27,10 @@ qbt:
 settings:
   force_auto_tmm: False  # Will force qBittorrent to enable Automatic Torrent Management for each torrent.
   tracker_error_tag: issue  # Will set the tag of any torrents that do not have a working tracker.
-
+  ignoreTags_OnUpdate: # Will ignore a list of tags when running the update tag function
+    - noHL
+    - issue
+    - cross-seed
 directory:
   # Do not remove these
   # Cross-seed var: </your/path/here/>  # Output directory of cross-seed
@@ -52,7 +55,7 @@ cat:
 # Tag Parameters
 tracker:
   # <Tracker URL Keyword>:    # <MANDATORY> This is the keyword in the tracker url
-  # <MANDATORY> Set tag name
+  # <MANDATORY> Set tag name. Can be a list of tags or a single tag
   #   tag: <Tag Name>
   # <OPTIONAL> Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. -2 means the global limit should be used, -1 means no limit.
   #   max_ratio: 5.0
@@ -66,13 +69,16 @@ tracker:
     tag: AnimeBytes
     notifiarr: animebytes
   avistaz:
-    tag: Avistaz
+    tag:
+      - Avistaz
+      - tag2
+      - tag3
     max_ratio: 5.0
     max_seeding_time: 129600
     limit_upload_speed: 150
     notifiarr: avistaz
   beyond-hd:
-    tag: Beyond-HD
+    tag: [Beyond-HD, tag2, tag3]
     notifiarr: beyondhd
   blutopia:
     tag: Blutopia
@@ -232,8 +238,8 @@ This section defines any settings defined in the configuration.
 | Variable | Definition | Required
 | :------------ | :------------  | :------------
 | `force_auto_tmm`| Will force qBittorrent to enable Automatic Torrent Management for each torrent.|<center>❌</center>
-| `tracker_error_tag` | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`| <center>❌</center>
-
+| `tracker_error_tag` | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`)| <center>❌</center>
+| `ignoreTags_OnUpdate` | When running `--tag-update` function, it will update torrent tags for a given torrent even if the torrent have one or more of the tags defined here.| <center>❌</center>
 <br>
 ## **directory:**
 ---
@@ -270,7 +276,7 @@ This section defines the tags used based upon the tracker's URL.<br>
 
 | Variable | Definition | Default Values| Required
 | :------------ | :------------  | :------------ | :------------
-| `tag` | The Tracker Tag| Tracker URL | <center>✅</center>
+| `tag` | The tracker tag or additional list of tags defined| Tracker URL | <center>✅</center>
 | `max_ratio` | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit) | None | <center>❌</center>
 | `max_seeding_time` | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)| None |  <center>❌</center>
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
