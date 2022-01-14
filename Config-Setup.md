@@ -27,7 +27,7 @@ qbt:
 settings:
   force_auto_tmm: False  # Will force qBittorrent to enable Automatic Torrent Management for each torrent.
   tracker_error_tag: issue  # Will set the tag of any torrents that do not have a working tracker.
-  ignoreTags_OnUpdate: # Will ignore a list of tags when running the update tag function
+  ignoreTags_OnUpdate: # When running tag-update function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.
     - noHL
     - issue
     - cross-seed
@@ -239,7 +239,7 @@ This section defines any settings defined in the configuration.
 | :------------ | :------------  | :------------
 | `force_auto_tmm`| Will force qBittorrent to enable Automatic Torrent Management for each torrent.|<center>❌</center>
 | `tracker_error_tag` | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`)| <center>❌</center>
-| `ignoreTags_OnUpdate` | When running `--tag-update` function, it will update torrent tags for a given torrent even if the torrent have one or more of the tags defined here.| <center>❌</center>
+| `ignoreTags_OnUpdate` | When running `--tag-update` function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here.| <center>❌</center>
 <br>
 ## **directory:**
 ---
