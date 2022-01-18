@@ -507,6 +507,7 @@ Payload will be sent when Unregistered Torrents are found
   "torrent_status": str,                   // Torrent Tracker Status message
   "torrent_tracker": str,                  // Torrent Tracker URL
   "notifiarr_indexer": str,                // Notifiarr React name/id for indexer
+  "torrents_deleted_and_contents": bool,   // Deleted Torrents and contents or Deleted just the torrent
 }
 ```
 ### **Tag Tracker Error Notifications**
@@ -594,6 +595,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
   "cleanup": True,                          // Cleanup flag
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
+  "torrents_deleted_and_contents": bool,    // Deleted Torrents and contents or Deleted just the torrent
 }
 ```
 ### **Empty Recycle Bin Notifications**
