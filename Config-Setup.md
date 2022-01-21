@@ -400,27 +400,27 @@ Payload will be sent at the start of the run
 Payload will be sent at the end of the run
 ```yaml
 {
-  "function": "run_end",                    // Webhook Trigger keyword
-  "title": str,                             // Title of the Payload
-  "body": str,                              // Message of the Payload
-  "start_time": str,                        // Time Run started Format "YYYY-mm-dd HH:MM:SS"
-  "end_time": str,                          // Time Run ended Format "YYYY-mm-dd HH:MM:SS"
-  "next_run": str,                          // Time Next Run Format "YYYY-mm-dd HH:MM:SS"
-  "run_time": str,                          // Total Run Time "H:MM:SS"
-  "torrents_added": int,                    // Total Torrents Added
-  "torrents_deleted": int,                  // Total Torrents Deleted
-  "torrents_deleted_and_contents": int,     // Total Torrents + Contents Deleted
-  "torrents_resumed": int,                  // Total Torrents Resumed
-  "torrents_rechecked": int,                // Total Torrents Rechecked
-  "torrents_categorized": int,              // Total Torrents Categorized
-  "torrents_tagged": int,                   // Total Torrents Tagged
-  "remove_unregistered": int,               // Total Unregistered Torrents Removed
-  "torrents_tagged_tracker_error": int,     // Total Tracker Error Torrents Tagged
-  "torrents_untagged_tracker_error": int,   // Total Tracker Error Torrents untagged
-  "orphaned_files_found": int,              // Total Orphaned Files Found
-  "torrents_tagged_no_hardlinks": int,      // Total noHL Torrents Tagged
-  "torrents_untagged_no_hardlinks": int,    // Total noHL Torrents untagged
-  "files_deleted_from_recyclebin": int      // Total Files Deleted from Recycle Bin
+  "function": "run_end",                      // Webhook Trigger keyword
+  "title": str,                               // Title of the Payload
+  "body": str,                                // Message of the Payload
+  "start_time": str,                          // Time Run started Format "YYYY-mm-dd HH:MM:SS"
+  "end_time": str,                            // Time Run ended Format "YYYY-mm-dd HH:MM:SS"
+  "next_run": str,                            // Time Next Run Format "YYYY-mm-dd HH:MM:SS"
+  "run_time": str,                            // Total Run Time "H:MM:SS"
+  "torrents_added": int,                      // Total Torrents Added
+  "torrents_deleted": int,                    // Total Torrents Deleted
+  "torrents_deleted_and_contents_count": int, // Total Torrents + Contents Deleted
+  "torrents_resumed": int,                    // Total Torrents Resumed
+  "torrents_rechecked": int,                  // Total Torrents Rechecked
+  "torrents_categorized": int,                // Total Torrents Categorized
+  "torrents_tagged": int,                     // Total Torrents Tagged
+  "remove_unregistered": int,                 // Total Unregistered Torrents Removed
+  "torrents_tagged_tracker_error": int,       // Total Tracker Error Torrents Tagged
+  "torrents_untagged_tracker_error": int,     // Total Tracker Error Torrents untagged
+  "orphaned_files_found": int,                // Total Orphaned Files Found
+  "torrents_tagged_no_hardlinks": int,        // Total noHL Torrents Tagged
+  "torrents_untagged_no_hardlinks": int,      // Total noHL Torrents untagged
+  "files_deleted_from_recyclebin": int        // Total Files Deleted from Recycle Bin
 }
 ```
 
