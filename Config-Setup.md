@@ -132,8 +132,12 @@ nohardlinks:
     cleanup: false
     # <OPTIONAL> max_ratio var: Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading
     max_ratio: 4.0
-    # <OPTIONAL> seeding time var: Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding
+    # <OPTIONAL> max seeding time var: Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding
     max_seeding_time: 86400
+    # <OPTIONAL> Limit Upload Speed var: Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)
+    limit_upload_speed:
+    # <OPTIONAL> min seeding time var: Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).
+    min_seeding_time: 43200
 
   # Can have additional categories set with separate ratio/seeding times defined.
   series-completed:
@@ -145,8 +149,12 @@ nohardlinks:
     cleanup: false
     # <OPTIONAL> max_ratio var: Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading
     max_ratio: 4.0
-    # <OPTIONAL> seeding time var: Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding
+    # <OPTIONAL> max seeding time var: Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding
     max_seeding_time: 86400
+    # <OPTIONAL> Limit Upload Speed var: Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)
+    limit_upload_speed:
+    # <OPTIONAL> min seeding time var: Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).
+    min_seeding_time: 43200
 
 # Recycle Bin method of deletion will move files into the recycle bin (Located in /root_dir/.RecycleBin) instead of directly deleting them in qbit
 # By default the Recycle Bin will be emptied on every run of the qbit_manage script if empty_after_x_days is defined.
@@ -310,6 +318,7 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 | `max_ratio` | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit) | None | <center>❌</center>
 | `max_seeding_time` | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)| None |  <center>❌</center>
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
+| `min_seeding_time` | Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).| None | <center>❌</center>
 | `exclude_tags` | List of tags to exclude from the check. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None | <center>❌</center>
 
 ## **recyclebin:**
@@ -435,6 +444,7 @@ Payload will be sent when adding a cross-seed torrent to qBittorrent if the orig
   "torrent_category": str,              // Torrent Category
   "torrent_save_path": str,             // Torrent Download directory
   "torrent_tag": "cross-seed",          // Total Torrents Added
+  "torrent_tracker": str                // Torrent Tracker
 }
 ```
 Payload will be sent when there are existing torrents found that are missing the cross-seed tag
@@ -446,6 +456,7 @@ Payload will be sent when there are existing torrents found that are missing the
   "torrent_name": str,                  // Torrent Name
   "torrent_category": str,              // Torrent Category
   "torrent_tag": "cross-seed",          // Tag Added
+  "torrent_tracker": str                // Torrent Tracker
 }
 ```
 
