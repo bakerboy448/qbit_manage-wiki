@@ -28,7 +28,7 @@ Below is a list of the docker enviroment variables
 | QBT_LOGFILE | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
 | QBT_CROSS_SEED | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  | False |
 | QBT_RECHECK | Recheck paused torrents sorted by lowest size. Resume if Completed.  | False |
-| QBT_CAT_UPDATE |  Use this if you would like to update your categories.  | False |
+| QBT_CAT_UPDATE |  Use this if you would like to update your categories or move from one category to another..  | False |
 | QBT_TAG_UPDATE |  Use this if you would like to update your tags. (Only adds tags to untagged torrents) | False |
 | QBT_REM_UNREGISTERED |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data) | False |
 | QBT_REM_ORPHANED | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. | False |

@@ -28,6 +28,7 @@ This wiki should tell you everything you need to know about the script to get it
           - [settings](Config-Setup#settings)
           - [directory](Config-Setup#directory)
           - [cat](Config-Setup#cat)
+          - [cat_changes](Config-Setup#cat_changes)
           - [tracker](Config-Setup#tracker)
           - [nohardlinks](Config-Setup#nohardlinks)
           - [recyclebin](Config-Setup#recyclebin)

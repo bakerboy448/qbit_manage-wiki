@@ -7,7 +7,7 @@
 | `-lf LOGFILE,` or `--log-file LOGFILE,` | QBT_LOGFILE | This is used if you want to use a different name for your log file. `Example: tv.log` | activity.log |
 | `-cs` or `--cross-seed` | QBT_CROSS_SEED | Use this after running [cross-seed script](https://github.com/mmgoodnow/cross-seed) to add torrents from the cross-seed output folder to qBittorrent  | False |
 | `-re` or `--recheck` | QBT_RECHECK | Recheck paused torrents sorted by lowest size. Resume if Completed.  | False |
-| `-cu` or `--cat-update` | QBT_CAT_UPDATE |  Use this if you would like to update your categories.  | False |
+| `-cu` or `--cat-update` | QBT_CAT_UPDATE |  Use this if you would like to update your categories or move from one category to another. | False |
 | `-tu` or `--tag-update` | QBT_TAG_UPDATE |  Use this if you would like to update your tags and/or set seed goals/limit upload speed by tag. (Only adds tags to untagged torrents) | False |
 | `-ru` or `--rem-unregistered` | QBT_REM_UNREGISTERED |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data). Trackers that have an error and not covered by the remove unregistered logic will also be tagged as `issue` for manual review.| False |
 | `-tte` or `--tag-tracker-error` | QBT_TAG_TRACKER_ERROR |  Use this if you would like to tag torrents that do not have a working tracker. | False |
