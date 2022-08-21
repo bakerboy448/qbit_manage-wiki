@@ -18,6 +18,19 @@ A template Configuration File can be found in the repo [config/config.yml.sample
 # Please refer to the link below for more details on how to set up the configuration file
 # https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup
 
+commands:
+  # The commands defined below will IGNORE any commands used in command line and docker env variables.
+  dry_run: True
+  cross_seed: False
+  recheck: False
+  cat_update: False
+  tag_update: False
+  rem_unregistered: False
+  tag_tracker_error: False
+  rem_orphaned: False
+  tag_nohardlinks: False
+  skip_recycle: False
+
 qbt:
   # qBittorrent parameters
   host: "localhost:8080"
@@ -231,9 +244,9 @@ webhooks:
     tag_nohardlinks: notifiarr
     empty_recyclebin: notifiarr
 
-bhd:
-  # BHD Integration used for checking unregistered torrents
-  apikey:
+  bhd:
+    # BHD Integration used for checking unregistered torrents
+    apikey:
 ```
 # **List of variables**<br>
 
