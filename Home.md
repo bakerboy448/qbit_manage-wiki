@@ -24,6 +24,7 @@ This wiki should tell you everything you need to know about the script to get it
     - [Config Setup](Config-Setup)
         - [Sample Config File](Config-Setup#config-file)
         - [List of variables](Config-Setup#list-of-variables)
+          - [commands](Config-Setup#commands)
           - [qbt](Config-Setup#qbt)
           - [settings](Config-Setup#settings)
           - [directory](Config-Setup#directory)

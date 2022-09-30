@@ -33,7 +33,7 @@ Below is a list of the docker enviroment variables
 | QBT_REM_UNREGISTERED |  Use this if you would like to remove unregistered torrents. (It will the delete data & torrent if it is not being cross-seeded, otherwise it will just remove the torrent without deleting data) | False |
 | QBT_REM_ORPHANED | Use this if you would like to remove orphaned files from your `root_dir` directory that are not referenced by any torrents. It will scan your `root_dir` directory and compare it with what is in qBittorrent. Any data not referenced in qBittorrent will be moved into `/data/torrents/orphaned_data` folder for you to review/delete. | False |
 | QBT_TAG_NOHARDLINKS | Use this to tag any torrents that do not have any hard links associated with any of the files. This is useful for those that use Sonarr/Radarr that hard links your media files with the torrents for seeding. When files get upgraded they no longer become linked with your media therefore will be tagged with a new tag noHL. You can then safely delete/remove these torrents to free up any extra space that is not being used by your media folder. | False |
-| QBT_SKIP_RECYCLE | Use this to skip emptying the Reycle Bin folder (`/root_dir/.RecycleBin`). | False |
+| QBT_SKIP_CLEANUP | Use this to skip emptying the Reycle Bin folder (`/root_dir/.RecycleBin`) and Orphaned directory. (`/root_dir/orphaned_data`) | False |
 | QBT_DRY_RUN |   If you would like to see what is gonna happen but not actually move/delete or tag/categorize anything. | False |
 | QBT_LOG_LEVEL |   Change the ouput log level. | INFO |
 | QBT_DIVIDER |   Character that divides the sections (Default: '=') | = |
@@ -62,7 +62,7 @@ services:
       - QBT_REM_UNREGISTERED=false
       - QBT_REM_ORPHANED=false
       - QBT_TAG_NOHARDLINKS=false
-      - QBT_SKIP_RECYCLE=false
+      - QBT_SKIP_CLEANUP=false
       - QBT_DRY_RUN=false
       - QBT_LOG_LEVEL=INFO
       - QBT_DIVIDER==

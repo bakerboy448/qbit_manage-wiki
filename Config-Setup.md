@@ -29,7 +29,7 @@ commands:
   tag_tracker_error: False
   rem_orphaned: False
   tag_nohardlinks: False
-  skip_recycle: False
+  skip_cleanup: False
 
 qbt:
   # qBittorrent parameters
@@ -58,6 +58,7 @@ directory:
   remote_dir: "/mnt/user/data/torrents/"
   recycle_bin: "/mnt/user/data/torrents/.RecycleBin"
   torrents_dir: "/qbittorrent/data/BT_backup"
+  orphaned_dir: "/data/torrents/orphaned_data"
 
 cat:
   # Category & Path Parameters
@@ -199,6 +200,10 @@ recyclebin:
 
 orphaned:
   # Orphaned files are those in the root_dir download directory that are not referenced by any active torrents.
+  # Will automatically remove all files and folders in orphaned data after x days. (Checks every script run)
+  # If this variable is not defined it, the orphaned data will never be emptied.
+  # WARNING: Setting this variable to 0 will delete all files immediately upon script run!
+  empty_after_x_days: 60
   # File patterns that will not be considered orphaned files. Handy for generated files that aren't part of the torrent but belong with the torrent's files
   exclude_patterns:
     - "**/.DS_Store"
@@ -242,13 +247,22 @@ webhooks:
     tag_tracker_error: notifiarr
     rem_orphaned: notifiarr
     tag_nohardlinks: notifiarr
-    empty_recyclebin: notifiarr
+    cleanup_dirs: notifiarr
 
-  bhd:
-    # BHD Integration used for checking unregistered torrents
-    apikey:
+bhd:
+  # BHD Integration used for checking unregistered torrents
+  apikey:
 ```
 # **List of variables**<br>
+
+## **commands:**
+---
+This section will ignore any commands that are defined via environment varialbe or command line and use the ones defined in this yaml file instead. Useful if you want to run qbm with multiple configurations files that execute different commands for each qbt instance.
+
+| Variable | Definition | Required
+| :------------ | :------------  | :------------
+| `command` | The command that you want qbm to execute.| <center>❌</center>
+
 
 ## **qbt:**
 ---
@@ -283,6 +297,7 @@ This section defines the directories that qbit_manage will be looking into for v
 | `remote_dir` | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally (not required if running qbit_manage in a container) and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host. |<center>❌</center>
 | `recycle_bin` | Path of the RecycleBin folder. Default location is set to `remote_dir/.RecycleBin`. |<center>❌</center>
 | `torrents_dir` | Path of the your qbittorrent torrents directory. Required for `save_torrents` attribute in recyclebin `/qbittorrent/data/BT_backup`. |<center>❌</center>
+| `orphaned_dir` | Path of the Orphaned Directory folder. Default location is set to `remote_dir/orpahaned_data`. |<center>❌</center>
 ## **cat:**
 ---
 This section defines the categories that you are currently using and the path's that are associated with them.<br>
@@ -379,7 +394,9 @@ This is handy when you have automatically generated files that certain OSs decid
 
 | Variable  | Definition | Default Values| Required
 | :------------ | :------------  | :------------ | :------------
+| `empty_after_x_days` | Will delete Orphaned data contents if the files have been in the Orphaned data for more than x days. (Uses date modified to track the time)| None | <center>❌</center>
 |`exclude_patterns`| List of [patterns](https://commandbox.ortusbooks.com/usage/parameters/globbing-patterns) to exclude certain files from orphaned | None | <center>❌</center>
+> Note: The more time you place for the `empty_after_x_days:` variable the better, allowing you more time to catch any mistakes by the script. If the variable is set to `0` it will delete contents immediately after every script run. If the variable is not set it will never delete the contents of the Orphaned Data.
 
 ## **apprise:**
 ---
@@ -416,7 +433,7 @@ Provide webhook notifications based on event triggers
 |[tag_tracker_error](#tag-tracker-error-notifications)| During the removing unregistered torrents/tag tracker error function | N/A | <center>❌</center>
 |[rem_orphaned](#remove-orphaned-files-notifications)| During the removing orphaned function| N/A | <center>❌</center>
 |[tag_nohardlinks](#tag-no-hardlinks-notifications)| During the tag no hardlinks function | N/A | <center>❌</center>
-|[empty_recyclebin](#empty-recycle-bin-notifications)| When files are deleted from the Recycle Bin | N/A | <center>❌</center>
+|[cleanup_dirs](#cleanup-directories-notifications)| When files are deleted from certain directories | N/A | <center>❌</center>
 
 
 ### **Error Notifications**
@@ -465,7 +482,8 @@ Payload will be sent at the end of the run
   "orphaned_files_found": int,                // Total Orphaned Files Found
   "torrents_tagged_no_hardlinks": int,        // Total noHL Torrents Tagged
   "torrents_untagged_no_hardlinks": int,      // Total noHL Torrents untagged
-  "files_deleted_from_recyclebin": int        // Total Files Deleted from Recycle Bin
+  "files_deleted_from_recyclebin": int,       // Total Files Deleted from Recycle Bin
+  "files_deleted_from_orphaned": int          // Total Files Deleted from Orphaned Data
 }
 ```
 
@@ -645,16 +663,17 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
   "torrents_deleted_and_contents": bool,    // Deleted Torrents and contents or Deleted just the torrent
 }
 ```
-### **Empty Recycle Bin Notifications**
-Payload will be sent when files are deleted from the Recycle Bin folder
+### **Cleanup directories Notifications**
+Payload will be sent when files are deleted/cleaned up from the various folders
 ```yaml
 {
-  "function": "empty_recyclebin",         // Webhook Trigger keyword
+  "function": "cleanup_dirs",             // Webhook Trigger keyword
+  "location": str,                        // Location of the folder that is being cleaned
   "title": str,                           // Title of the Payload
   "body": str,                            // Message of the Payload
-  "files": list,                          // List of files that were deleted from the Recycle Bin
-  "empty_after_x_days": str,              // Number of days that the files will be kept in the Recycle Bin
-  "size_in_bytes": int,                   // Total number of bytes deleted from the Recycle Bin
+  "files": list,                          // List of files that were deleted from the location
+  "empty_after_x_days": int,              // Number of days that the files will be kept in the location
+  "size_in_bytes": int,                   // Total number of bytes deleted from the location
 }
 ```
 
