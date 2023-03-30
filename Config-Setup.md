@@ -147,7 +147,7 @@ nohardlinks:
   # Mandatory to fill out directory parameter above to use this function (root_dir/remote_dir)
   # This variable should be set to your category name of your completed movies/completed series in qbit. Acceptable variable can be any category you would like to tag if there are no hardlinks found
   movies-completed:
-    # <OPTIONAL> exclude_tags var: Will exclude the following tags when searching through the category.
+    # <OPTIONAL> exclude_tags var: Will exclude torrents with any of the following tags when searching through the category.
     exclude_tags:
       - Beyond-HD
       - AnimeBytes
@@ -165,7 +165,7 @@ nohardlinks:
 
   # Can have additional categories set with separate ratio/seeding times defined.
   series-completed:
-    # <OPTIONAL> exclude_tags var: Will exclude the following tags when searching through the category.
+    # <OPTIONAL> exclude_tags var: Will exclude torrents with any of the following tags when searching through the category.
     exclude_tags:
       - Beyond-HD
       - BroadcasTheNet
@@ -370,7 +370,7 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 | `max_seeding_time` | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)| None |  <center>❌</center>
 | `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)| None | <center>❌</center>
 | `min_seeding_time` | Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).| None | <center>❌</center>
-| `exclude_tags` | List of tags to exclude from the check. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None | <center>❌</center>
+| `exclude_tags` | List of tags to exclude from the check. Torrents with any of these tags will not be processed. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None | <center>❌</center>
 
 ## **recyclebin:**
 ---
