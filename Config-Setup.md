@@ -312,7 +312,7 @@ The syntax for all the categories are as follows
 ```yaml
 category: <path>/<to>/category
 ```
-## **cat_changes:**
+## **cat_change:**
 ---
 This moves all the torrents from one category to another category if the torrents are marked as complete.<br>
 > **NOTE** **WARNING**: if the paths are different and Default Torrent Management Mode is set to automatic the files could be moved !!!
