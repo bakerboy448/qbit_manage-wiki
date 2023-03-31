@@ -1,13 +1,17 @@
-* Requires `python 3`. Dependencies must be installed by running:
+# Local Installations
+
+* Requires `python 3.8.1`. Dependencies must be installed by running:
 
 Navigate to the directory you'd liked to clone the repo into
 
 Clone the repo
+
 ```bash
 git clone https://github.com/StuffAnThings/qbit_manage
 ```
 
 Install requirements
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -26,6 +30,7 @@ To run the script in an interactive terminal run:
 * Fill out the config file as outlined in the [Config-Setup](https://github.com/StuffAnThings/qbit_manage/wiki/Config-Setup)
 
 Run the script `-h` to see a list of commands
+
 ```bash
 python qbit_manage.py -h
 ```

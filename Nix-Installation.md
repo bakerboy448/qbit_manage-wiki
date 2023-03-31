@@ -1,3 +1,4 @@
+# \*Nix Installation
 
 * Download the script
 
