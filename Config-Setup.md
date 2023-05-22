@@ -471,7 +471,7 @@ Provide webhook notifications based on event triggers
 
 Payload will be sent on any errors
 
-```json
+```yaml
 {
   "function": "run_error",     // Webhook Trigger keyword
   "title": str,                // Title of the Payload
@@ -485,7 +485,7 @@ Payload will be sent on any errors
 
 Payload will be sent at the start of the run
 
-```json
+```yaml
 {
   "function": "run_start",     // Webhook Trigger keyword
   "title": str,                // Title of the Payload
@@ -499,7 +499,7 @@ Payload will be sent at the start of the run
 
 Payload will be sent at the end of the run
 
-```json
+```yaml
 {
   "function": "run_end",                      // Webhook Trigger keyword
   "title": str,                               // Title of the Payload
@@ -530,7 +530,7 @@ Payload will be sent at the end of the run
 
 Payload will be sent when adding a cross-seed torrent to qBittorrent if the original torrent is complete
 
-```json
+```yaml
 {
   "function": "cross_seed",             // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
@@ -545,7 +545,7 @@ Payload will be sent when adding a cross-seed torrent to qBittorrent if the orig
 
 Payload will be sent when there are existing torrents found that are missing the cross-seed tag
 
-```json
+```yaml
 {
   "function": "tag_cross_seed",         // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
@@ -561,7 +561,7 @@ Payload will be sent when there are existing torrents found that are missing the
 
 Payload will be sent when rechecking/resuming a torrent that is paused
 
-```json
+```yaml
 {
   "function": "recheck",             // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
@@ -577,7 +577,7 @@ Payload will be sent when rechecking/resuming a torrent that is paused
 
 Payload will be sent when updating torrents with missing category
 
-```json
+```yaml
 {
   "function": "cat_update",          // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
@@ -593,7 +593,7 @@ Payload will be sent when updating torrents with missing category
 
 Payload will be sent when updating torrents with missing tag
 
-```json
+```yaml
 {
   "function": "tag_update",                 // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
@@ -613,7 +613,7 @@ Payload will be sent when updating torrents with missing tag
 
 Payload will be sent when Unregistered Torrents are found
 
-```json
+```yaml
 {
   "function": "rem_unregistered",          // Webhook Trigger keyword
   "title": str,                            // Title of the Payload
@@ -631,7 +631,7 @@ Payload will be sent when Unregistered Torrents are found
 
 Payload will be sent when trackers with errors are tagged/untagged
 
-```json
+```yaml
 {
   "function": "tag_tracker_error",                   // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
@@ -645,7 +645,7 @@ Payload will be sent when trackers with errors are tagged/untagged
 }
 ```
 
-```json
+```yaml
 {
   "function": "untag_tracker_error",                 // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
@@ -662,7 +662,7 @@ Payload will be sent when trackers with errors are tagged/untagged
 
 Payload will be sent when Orphaned Files are found and moved into the orphaned folder
 
-```json
+```yaml
 {
   "function": "rem_orphaned",          // Webhook Trigger keyword
   "title": str,                        // Title of the Payload
@@ -677,7 +677,7 @@ Payload will be sent when Orphaned Files are found and moved into the orphaned f
 
 Payload will be sent when no hard links are found for any files in a particular torrent
 
-```json
+```yaml
 {
   "function": "tag_nohardlinks",            // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
@@ -695,7 +695,7 @@ Payload will be sent when no hard links are found for any files in a particular 
 
 Payload will be sent when hard links are found for any torrents that were previously tagged with `noHL`
 
-```json
+```yaml
 {
   "function": "untag_nohardlinks",          // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
@@ -713,7 +713,7 @@ Payload will be sent when hard links are found for any torrents that were previo
 
 Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets share limit criteria.
 
-```json
+```yaml
 {
   "function": "cleanup_tag_nohardlinks",    // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
@@ -731,7 +731,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
 
 Payload will be sent when files are deleted/cleaned up from the various folders
 
-```json
+```yaml
 {
   "function": "cleanup_dirs",             // Webhook Trigger keyword
   "location": str,                        // Location of the folder that is being cleaned
