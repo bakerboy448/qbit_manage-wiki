@@ -23,6 +23,7 @@ This wiki should tell you everything you need to know about the script to get it
     * [Local Installation](Local-Installations)
     * [NIX Installation](Nix-Installation)
     * [Docker Installation](Docker-Installation)
+    * [V4 Migration Guide](v4-Migration-Guide)
   * [Config Setup](Config-Setup)
     * [Sample Config File](Config-Setup#config-file)
     * [List of variables](Config-Setup#list-of-variables)
