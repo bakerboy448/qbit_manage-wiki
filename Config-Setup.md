@@ -11,10 +11,8 @@ A template Configuration File can be found in the repo [config/config.yml.sample
 > As this software is constantly evolving and this wiki might not be up to date the sample shown here might not might not be current. Please refer to the repo for the most current version.
 
 # Config File
+
 ## [Config Sample File](https://github.com/StuffAnThings/qbit_manage/blob/master/config/config.yml.sample)
-
-
-
 
 # **List of variables**<br>
 
@@ -61,9 +59,9 @@ This section defines the directories that qbit_manage will be looking into for v
 | `cross_seed`   | Output directory of cross-seed, originally the application [cross-seed](https://github.com/mmgoodnow/cross-seed) was incapable of injecting cross-seed torrent into qB, this was built to inject them for the application. This is no longer required if you're using injects with that software. However, you can find other uses for this as it is more of a watch directory now. | QBT_CROSS_SEED                                                |
 | `root_dir`     | Root downloads directory used to check for orphaned files, noHL, and remove unregistered. This directory is where you place all your downloads. This will need to be how qB views the directory where it places the downloads. This is required if you're using qbit_managee and/or qBittorrent within a container.                                                                 | QBT_REM_ORPHANED / QBT_TAG_NOHARDLINKS / QBT_REM_UNREGISTERED |
 | `remote_dir`   | Path of docker host mapping of root_dir, this must be set if you're running qbit_manage locally (not required if running qbit_manage in a container) and qBittorrent/cross_seed is in a docker. Essentially this is where your downloads are being kept on the host.                                                                                                                | <center>❌</center>                                            |
-| `recycle_bin`  | Path of the RecycleBin folder. Default location is set to `remote_dir/.RecycleBin`.                                                                                                                                                                                                                                                                                                 | <center>❌</center>                                            |
+| `recycle_bin`  | Path of the RecycleBin folder. Default location is set to `remote_dir/.RecycleBin`. All files in this folder will be cleaned up based on your recycle bin settings.                                                                                                                                                                                                                 | <center>❌</center>                                            |
 | `torrents_dir` | Path of the your qbittorrent torrents directory. Required for `save_torrents` attribute in recyclebin `/qbittorrent/data/BT_backup`.                                                                                                                                                                                                                                                | <center>❌</center>                                            |
-| `orphaned_dir` | Path of the Orphaned Directory folder. Default location is set to `remote_dir/orphaned_data`.                                                                                                                                                                                                                                                                                       | <center>❌</center>                                            |
+| `orphaned_dir` | Path of the Orphaned Directory folder. Default location is set to `remote_dir/orphaned_data`. All files in this folder will be cleaned up based on your orphaned data settings. Only orphaned data shall exist in this path as all contents are considered disposable.                                                                                                              | <center>❌</center>                                            |
 
 ## **cat:**
 
@@ -138,14 +136,14 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 | :------------ | :--------------------------------------------------------------- | :----------------- |
 | `key`         | Category name of your completed movies/completed series in qbit. | <center>✅</center> |
 
-| Variable             | Definition                                                                                                                                                                            | Default Values | Required           |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------- | :----------------- |
-| `cleanup`            | True = Remove the non-hardlinked torrent data/contents once share limits have been met, False = Use (Automatic Torrent Management) to handle seeding limits                           | False          | <center>✅</center> |
-| `max_ratio`          | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit)                                                     | None           | <center>❌</center> |
-| `max_seeding_time`   | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit) (The `max_seeding_time` will count from the moment the NoHL tag is set)   | None           | <center>❌</center> |
-| `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)                                                                                                                | None           | <center>❌</center> |
-| `min_seeding_time`   | Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).                                                                      | None           | <center>❌</center> |
-| `exclude_tags`       | List of tags to exclude from the check. Torrents with any of these tags will not be processed. This is useful to exclude certain trackers from being scanned for hardlinking purposes | None           | <center>❌</center> |
+| Variable             | Definition                                                                                                                                                                                             | Default Values | Required           |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :----------------- |
+| `cleanup`            | True = Remove the non-hardlinked torrent data/contents once share limits have been met, False = Use (Automatic Torrent Management) to handle seeding limits                                            | False          | <center>✅</center> |
+| `max_ratio`          | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit)                                                                      | None           | <center>❌</center> |
+| `max_seeding_time`   | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit) (The `max_seeding_time` will count from the moment the NoHL tag is set) | None           | <center>❌</center> |
+| `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)                                                                                                                                 | None           | <center>❌</center> |
+| `min_seeding_time`   | Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).                                                                                       | None           | <center>❌</center> |
+| `exclude_tags`       | List of tags to exclude from the check. Torrents with any of these tags will not be processed. This is useful to exclude certain trackers from being scanned for hardlinking purposes                  | None           | <center>❌</center> |
 
 ## **recyclebin:**
 
