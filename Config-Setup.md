@@ -47,6 +47,8 @@ This section defines any settings defined in the configuration.
 | :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
 | `force_auto_tmm`      | Will force qBittorrent to enable Automatic Torrent Management for each torrent.                                                                     | <center>❌</center> |
 | `tracker_error_tag`   | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`)                         | <center>❌</center> |
+| `nohardlinks_tag`   | Define the tag of any torrents that don't have hardlinks (Used in `--tag-nohardlinks`)                         | <center>❌</center> |
+| `share_limits_suffix_tag`   | Will add this suffix to the grouping separated by '.' to the tag of any torrents with share limits. For example, if you have a share-limit group `cross-seed`, the default share_limits_suffix_tag `share_limits` would add the tag `cross-seed.share_limit` (Used in `--share-limits`)                         | <center>❌</center> |
 | `ignoreTags_OnUpdate` | When running `--tag-update` function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here. | <center>❌</center> |
 
 ## **directory:**
@@ -108,12 +110,7 @@ This section defines the tags used based upon the tracker's URL.<br>
 | Variable             | Definition                                                                                                                        | Default Values | Required           |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------- | :----------------- |
 | `tag`                | The tracker tag or additional list of tags defined                                                                                | Tracker URL    | <center>✅</center> |
-| `max_ratio`          | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit) | None           | <center>❌</center> |
-| `max_seeding_time`   | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)    | None           | <center>❌</center> |
-| `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)                                                            | None           | <center>❌</center> |
 | `notifiarr`          | Set this to the notifiarr react name. This is used to add indexer reactions to the notifications sent by Notifiarr                | None           | <center>❌</center> |
-
-If either max_ratio or max_seeding_time is set to `-2` then the the global share limits will be used, `-1` then no share limits will be used.
 
 If you are unsure what key word to use. Simply select a torrent within qB and down at the bottom you should see a tab that says `Trackers` within the list that is populated there are ea list of trackers that are associated with this torrent, select a key word from there and add it to the config file. Make sure this key word is unique enough that the script will not get confused with any other tracker.
 
@@ -138,13 +135,29 @@ Beyond this you'll need to use one of the [categories](#cat) above as the key, a
 
 | Variable             | Definition                                                                                                                                                                                             | Default Values | Required           |
 | :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :----------------- |
-| `cleanup`            | True = Remove the non-hardlinked torrent data/contents once share limits have been met, False = Use (Automatic Torrent Management) to handle seeding limits                                            | False          | <center>✅</center> |
-| `max_ratio`          | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit)                                                                      | None           | <center>❌</center> |
-| `max_seeding_time`   | Will set the torrent Maximum seeding time (min) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit) (The `max_seeding_time` will count from the moment the NoHL tag is set) | None           | <center>❌</center> |
-| `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)                                                                                                                                 | None           | <center>❌</center> |
-| `min_seeding_time`   | Will ensure that torrent is not deleted by cleanup variable if torrent does not meet minimum seeding time (min).                                                                                       | None           | <center>❌</center> |
 | `exclude_tags`       | List of tags to exclude from the check. Torrents with any of these tags will not be processed. This is useful to exclude certain trackers from being scanned for hardlinking purposes                  | None           | <center>❌</center> |
 
+## **share_limits:**
+Control how torrent share limits are set depending on the priority of your grouping. This can apply a max ratio, seed time limits to your torrents or limit your torrent upload speed as well. Each torrent will be matched with the share limit group with the highest priority that meets the group filter criteria. Each torrent can only be matched with one share limit group.
+| Configuration | Definition                                                       | Required           |
+| :------------ | :--------------------------------------------------------------- | :----------------- |
+| `key`         | This variable is mandatory and is a text defining the name of your grouping. This can be any string you want. | <center>✅</center> |
+
+| Variable             | Definition                                                                                                                                                                                             | Default Values | Type | Required           |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :----------------- | :----------------- |
+| `priority`            | This is the priority of your grouping. The lower the number the higher the priority. This determines the order in which share limits are applied based on the filters set in this group                                            | largest priority + 1     |  int/float   | <center>✅</center> |
+| `include_all_tags`            | Filter the group based on one or more tags. Multiple include_all_tags are checked with an **AND** condition. All tags defined here must be present in the torrent for it to be included in this group                                        | None     |  list   | <center>❌</center> |
+| `include_any_tags`            | Filter the group based on one or more tags. Multiple include_any_tags are checked with an **OR** condition. Any tags defined here must be present in the torrent for it to be included in this group                                        | None     |  list   | <center>❌</center> |
+| `exclude_all_tags`            | Filter the group based on one or more tags. Multiple exclude_all_tags are checked with an **AND** condition. All tags defined here must be present in the torrent for it to be excluded in this group                                        | None     |  list   | <center>❌</center> |
+| `exclude_any_tags`            | Filter the group based on one or more tags. Multiple exclude_any_tags are checked with an **OR** condition. Any tags defined here must be present in the torrent for it to be excluded in this group                                        | None     |  list   | <center>❌</center> |
+| `categories`            | Filter by excluding one or more categories. Multiple categories are checked with an **OR** condition. Since one torrent can only be associated with a single category, multiple categories are checked with an **OR** condition                                        | None     |  list   | <center>❌</center> |
+| `cleanup`            | **WARNING!!** Setting this as true will remove and delete contents of any torrents that satisfies the share limits                                            | False     |  bool   | <center>❌</center> |
+| `max_ratio`          | Will set the torrent Maximum share ratio until torrent is stopped from seeding/uploading. (`-2` : Global Limit , `-1` : No Limit)                                                                      | -1      |  float   | <center>❌</center> |
+| `max_seeding_time`   | Will set the torrent Maximum seeding time (minutes) until torrent is stopped from seeding. (`-2` : Global Limit , `-1` : No Limit)  | -1      |  int   | <center>❌</center> |
+| `limit_upload_speed` | Will limit the upload speed KiB/s (KiloBytes/second) (`-1` : No Limit)                                                                                                                                 | -1      |  int   | <center>❌</center> |
+| `min_seeding_time`   | Will prevent torrent deletion by cleanup variable if torrent has not yet minimum seeding time (minutes).                                                                                      | 0      |  int   | <center>❌</center> |
+| `resume_torrent_after_change`   | Will resume your torrent after changing share limits.                                                                                     | True      |  bool   | <center>❌</center> |
+| `add_group_to_tag`   | This adds your grouping as a tag with a suffix defined in settings. Example: A grouping defined as noHL will have a tag set to noHL.share_limit (if using the default suffix)                                                                                    | True      |  bool   | <center>❌</center> |
 ## **recyclebin:**
 
 ---
@@ -211,6 +224,7 @@ Provide webhook notifications based on event triggers
 | [tag_tracker_error](#tag-tracker-error-notifications)           | During the removing unregistered torrents/tag tracker error function | N/A            | <center>❌</center> |
 | [rem_orphaned](#remove-orphaned-files-notifications)            | During the removing orphaned function                                | N/A            | <center>❌</center> |
 | [tag_nohardlinks](#tag-no-hardlinks-notifications)              | During the tag no hardlinks function                                 | N/A            | <center>❌</center> |
+| [share_limits](#share-limits-notifications)                     | During the share limits function                                     | N/A            | <center>❌</center> |
 | [cleanup_dirs](#cleanup-directories-notifications)              | When files are deleted from certain directories                      | N/A            | <center>❌</center> |
 
 ### **Error Notifications**
@@ -267,6 +281,8 @@ Payload will be sent at the end of the run
   "orphaned_files_found": int,                // Total Orphaned Files Found
   "torrents_tagged_no_hardlinks": int,        // Total noHL Torrents Tagged
   "torrents_untagged_no_hardlinks": int,      // Total noHL Torrents untagged
+  "torrents_updated_share_limits": int        // Total Share Limits updated
+  "torrents_cleaned_share_limits": int        // Total Share Limit Torrents Cleaned (Deleted + Contents Deleted)
   "files_deleted_from_recyclebin": int,       // Total Files Deleted from Recycle Bin
   "files_deleted_from_orphaned": int          // Total Files Deleted from Orphaned Data
 }
@@ -281,7 +297,7 @@ Payload will be sent when adding a cross-seed torrent to qBittorrent if the orig
   "function": "cross_seed",             // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
   "body": str,                          // Message of the Payload
-  "torrent_name": str,                  // Torrent Name
+  "torrents": [str],                    // List of Torrent Names
   "torrent_category": str,              // Torrent Category
   "torrent_save_path": str,             // Torrent Download directory
   "torrent_tag": "cross-seed",          // Total Torrents Added
@@ -296,7 +312,7 @@ Payload will be sent when there are existing torrents found that are missing the
   "function": "tag_cross_seed",         // Webhook Trigger keyword
   "title": str,                         // Title of the Payload
   "body": str,                          // Message of the Payload
-  "torrent_name": str,                  // Torrent Name
+  "torrents": [str],                    // List of Torrent Names
   "torrent_category": str,              // Torrent Category
   "torrent_tag": "cross-seed",          // Tag Added
   "torrent_tracker": str                // Torrent Tracker
@@ -312,7 +328,8 @@ Payload will be sent when rechecking/resuming a torrent that is paused
   "function": "recheck",             // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
   "body": str,                       // Message of the Payload
-  "torrent_name": str,               // Torrent Name
+  "torrents": [str],                 // List of Torrent Names
+  "torrent_tag": str,                // Torrent Tags
   "torrent_category": str,           // Torrent Category
   "torrent_tracker": str,            // Torrent Tracker URL
   "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
@@ -328,8 +345,9 @@ Payload will be sent when updating torrents with missing category
   "function": "cat_update",          // Webhook Trigger keyword
   "title": str,                      // Title of the Payload
   "body": str,                       // Message of the Payload
-  "torrent_name": str,               // Torrent Name
+  "torrents": [str],                 // List of Torrent Names
   "torrent_category": str,           // New Torrent Category
+  "torrent_tag": str,                // Torrent Tags
   "torrent_tracker": str,            // Torrent Tracker URL
   "notifiarr_indexer": str,          // Notifiarr React name/id for indexer
 }
@@ -344,14 +362,11 @@ Payload will be sent when updating torrents with missing tag
   "function": "tag_update",                 // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
-  "torrent_name": str,                      // Torrent Name
+  "torrents": [str],                        // List of Torrent Names
   "torrent_category": str,                  // Torrent Category
   "torrent_tag": str,                       // New Torrent Tag
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
-  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
-  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
-  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
 }
 ```
 
@@ -364,9 +379,10 @@ Payload will be sent when Unregistered Torrents are found
   "function": "rem_unregistered",          // Webhook Trigger keyword
   "title": str,                            // Title of the Payload
   "body": str,                             // Message of the Payload
-  "torrent_name": str,                     // Torrent Name
+  "torrents": [str],                       // List of Torrent Names
   "torrent_category": str,                 // Torrent Category
   "torrent_status": str,                   // Torrent Tracker Status message
+  "torrent_tag": str,                      // Torrent Tags
   "torrent_tracker": str,                  // Torrent Tracker URL
   "notifiarr_indexer": str,                // Notifiarr React name/id for indexer
   "torrents_deleted_and_contents": bool,   // Deleted Torrents and contents or Deleted just the torrent
@@ -382,7 +398,7 @@ Payload will be sent when trackers with errors are tagged/untagged
   "function": "tag_tracker_error",                   // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
   "body": str,                                       // Message of the Payload
-  "torrent_name": str,                               // Torrent Name
+  "torrents": [str],                                 // List of Torrent Names
   "torrent_category": str,                           // Torrent Category
   "torrent_tag": "issue",                            // Tag Added
   "torrent_status": str,                             // Torrent Tracker Status message
@@ -396,7 +412,7 @@ Payload will be sent when trackers with errors are tagged/untagged
   "function": "untag_tracker_error",                 // Webhook Trigger keyword
   "title": str,                                      // Title of the Payload
   "body": str,                                       // Message of the Payload
-  "torrent_name": str,                               // Torrent Name
+  "torrents": [str],                                 // List of Torrent Names
   "torrent_category": str,                           // Torrent Category
   "torrent_tag": str,                                // Tag Added
   "torrent_tracker": str,                            // Torrent Tracker URL
@@ -428,14 +444,11 @@ Payload will be sent when no hard links are found for any files in a particular 
   "function": "tag_nohardlinks",            // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
-  "torrent_name": str,                      // Torrent Name
+  "torrents": [str],                        // List of Torrent Names
   "torrent_category": str,                  // Torrent Category
   "torrent_tag": 'noHL',                    // Add `noHL` to Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
-  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
-  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
-  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
 }
 ```
 
@@ -446,25 +459,40 @@ Payload will be sent when hard links are found for any torrents that were previo
   "function": "untag_nohardlinks",          // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
-  "torrent_name": str,                      // Torrent Name
+  "torrents": [str],                        // List of Torrent Names
   "torrent_category": str,                  // Torrent Category
   "torrent_tag": 'noHL',                    // Remove `noHL` from Torrent Tags
   "torrent_tracker": str,                   // Torrent Tracker URL
   "notifiarr_indexer": str,                 // Notifiarr React name/id for indexer
-  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
-  "torrent_max_seeding_time": int,          // Set the Max Seeing Time (min) Share Limit
-  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit
 }
 ```
 
-Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets share limit criteria.
+### **Share Limits Notifications**
+Payload will be sent when Share Limits are updated for a specific group
+```yaml
+{
+  "function": "share_limits",               // Webhook Trigger keyword
+  "title": str,                             // Title of the Payload
+  "body": str,                              // Message of the Payload
+  "grouping": str,                          // Share Limit group name
+  "torrents": [str],                        // List of Torrent Names
+  "torrent_tag": str,                       // Torrent Tags
+  "torrent_max_ratio": float,               // Set the Max Ratio Share Limit
+  "torrent_max_seeding_time": int,          // Set the Max Seeding Time (minutes) Share Limit
+  "torrent_min_seeding_time": int,          // Set the Min Seeding Time (minutes) Share Limit
+  "torrent_limit_upload_speed": int         // Set the the torrent upload speed limit (kB/s)
+}
+```
+
+Payload will be sent when `cleanup` flag is set to true and torrent meets share limit criteria.
 
 ```yaml
 {
-  "function": "cleanup_tag_nohardlinks",    // Webhook Trigger keyword
+  "function": "cleanup_share_limits",       // Webhook Trigger keyword
   "title": str,                             // Title of the Payload
   "body": str,                              // Message of the Payload
-  "torrent_name": str,                      // Torrent Name
+  "grouping": str,                          // Share Limit group name
+  "torrents": [str],                        // List of Torrent Names
   "torrent_category": str,                  // Torrent Category
   "cleanup": True,                          // Cleanup flag
   "torrent_tracker": str,                   // Torrent Tracker URL
@@ -472,6 +500,7 @@ Payload will be sent when `cleanup` flag is set to true and `noHL` torrent meets
   "torrents_deleted_and_contents": bool,    // Deleted Torrents and contents or Deleted just the torrent
 }
 ```
+
 
 ### **Cleanup directories Notifications**
 

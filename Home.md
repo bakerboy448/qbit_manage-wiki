@@ -35,6 +35,7 @@ This wiki should tell you everything you need to know about the script to get it
       * [cat_changes](Config-Setup#cat_changes)
       * [tracker](Config-Setup#tracker)
       * [nohardlinks](Config-Setup#nohardlinks)
+      * [share_limits](Config-Setup#share_limits)
       * [recyclebin](Config-Setup#recyclebin)
       * [orphaned](Config-Setup#orphaned)
       * [apprise](Config-Setup#apprise)
