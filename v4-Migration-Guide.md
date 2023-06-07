@@ -50,7 +50,7 @@ tracker:
 nohardlinks:
 - movies
 - tv
-sharelimits:
+share_limits:
   group1.noHL:
     priority: 1
     include_any_tags:
