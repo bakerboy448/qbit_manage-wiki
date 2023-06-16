@@ -48,7 +48,7 @@ This section defines any settings defined in the configuration.
 | `force_auto_tmm`      | Will force qBittorrent to enable Automatic Torrent Management for each torrent.                                                                     | <center>❌</center> |
 | `tracker_error_tag`   | Define the tag of any torrents that do not have a working tracker. (Used in `--rem-unregistered` and `--tag-tracker-error`)                         | <center>❌</center> |
 | `nohardlinks_tag`   | Define the tag of any torrents that don't have hardlinks (Used in `--tag-nohardlinks`)                         | <center>❌</center> |
-| `share_limits_suffix_tag`   | Will add this suffix to the grouping separated by '.' to the tag of any torrents with share limits. For example, if you have a share-limit group `cross-seed`, the default share_limits_suffix_tag `share_limits` would add the tag `cross-seed.share_limit` (Used in `--share-limits`)                         | <center>❌</center> |
+| `share_limits_tag`   | Will add this tag when applying share limits to provide an easy way to filter torrents by share limit group/priority for each torrent. For example, if you have a share-limit group `cross-seed` with a priority of 2 and the default share_limits_tag `~share_limits` would add the tag `~share_limit_2.cross-seed` (Used in `--share-limits`)                         | <center>❌</center> |
 | `ignoreTags_OnUpdate` | When running `--tag-update` function, it will update torrent tags for a given torrent even if the torrent has one or more of the tags defined here. | <center>❌</center> |
 
 ## **directory:**
@@ -105,7 +105,7 @@ old_category_name: new_category_name
 This section defines the tags used based upon the tracker's URL.<br>
 | Configuration | Definition          | Required           |
 | :------------ | :------------------ | :----------------- |
-| `key`         | Tracker URL Keyword | <center>✅</center> |
+| `key`         | Tracker URL Keyword. You can define multiple tracker urls by splitting with `\|` delimiter  | <center>✅</center> |
 
 | Variable             | Definition                                                                                                                        | Default Values | Required           |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------- | :----------------- |
