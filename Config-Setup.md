@@ -526,4 +526,4 @@ BHD integration is used if you are on the private tracker BHD. (Used to identify
 
 | Variable | Definition  | Default Values | Required           |
 | :------- | :---------- | :------------- | :----------------- |
-| `apikey` | BHD API Key | N/A            | <center>✅</center> |
+| `apikey` | BHD API Key | `None` (blank)            | <center>✅</center> |
