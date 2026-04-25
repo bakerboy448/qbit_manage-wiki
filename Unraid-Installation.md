@@ -57,7 +57,7 @@ In the new text field you'll need to place:
 ```bash
 #!/bin/bash
 echo "Installing required packages"
-python3 -m pip install -r /mnt/user/path/to/requirements.txt 
+python3 -m pip install -r /mnt/user/path/to/requirements.txt
 echo "Required packages installed"
 ```
 
@@ -74,7 +74,7 @@ Now we need to edit the config file that came with the zip file.
 <br>The only thing that must be followed is that **ALL** categories that you see in your qBit **MUST** be added to the config file with associated directories, each directory must be unique for each category.
 
 > If you'd like a guide on setting up cross-seed on unRAID please visit [here](https://github.com/Drazzilb08/cross-seed-guide)
-  
+
 Now we need to go back to **User Scripts** and create our script to run this script
 
 ## Add a new script
@@ -99,6 +99,6 @@ if you want to change the arguments in the `<list of commands>`. The full list o
 
   Once you've got the config file set up you should be all set.
   Don't forget to set a cron schedule mines <br>`*/30 * * * *` <-- Runs every 30 min
-  
+
 **Final note:**<br>
 If you're wanting to do a test run please use the `--dry-run` argument anywhere w/in the call to test how things will look. Please do this before running a full run.

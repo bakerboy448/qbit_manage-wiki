@@ -2,7 +2,7 @@ name: Push To Wiki
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   sync_docs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current version
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
       - name: Sync with local action
         uses: kai-tub/external-repo-sync-action@v1
         with:
